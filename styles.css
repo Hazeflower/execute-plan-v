@@ -1,0 +1,85 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: #ffcccb; /* Light pink background */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container for content */
+.container {
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+header h1 {
+    color: #d1006d; /* Dark pink color */
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+/* Romantic message section */
+.message h2 {
+    font-size: 1.8em;
+    color: #d1006d;
+    margin-bottom: 10px;
+}
+
+.message p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+/* Date details */
+.date-details {
+    margin: 20px 0;
+}
+
+.date-details h3 {
+    font-size: 1.5em;
+    color: #d1006d;
+}
+
+.date-details p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+/* Button styling */
+button {
+    background-color: #ff6f61; /* Warm red color */
+    color: white;
+    font-size: 1.2em;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #d1006d; /* Darker red */
+}
+
+/* Footer */
+footer {
+    margin-top: 20px;
+    font-size: 1em;
+    color: #777;
+}
