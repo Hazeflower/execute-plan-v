@@ -14,6 +14,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    flex-direction: column; /* Stack elements vertically */
 }
 
 /* Container for content */
@@ -61,8 +62,8 @@ header h1 {
     color: #555;
 }
 
-/* Button styling */
-button {
+/* Button styling for the invitation page */
+#accept-btn {
     background-color: #ff6f61; /* Warm red color */
     color: white;
     font-size: 1.2em;
@@ -73,7 +74,7 @@ button {
     transition: background-color 0.3s ease;
 }
 
-button:hover {
+#accept-btn:hover {
     background-color: #d1006d; /* Darker red */
 }
 
@@ -87,7 +88,7 @@ footer {
 /* New styles for the itinerary page */
 
 /* The container for the itinerary selection form */
-.itinerary-container {
+#itineraryPage .itinerary-container {
     background-color: #ffffff;
     padding: 30px;
     border-radius: 10px;
@@ -95,16 +96,17 @@ footer {
     display: inline-block;
     text-align: left;
     margin-top: 50px; /* Spacing from the top */
+    width: 100%; /* Make sure it takes the full width of its container */
 }
 
 /* Styling for the form and checkboxes */
-label {
+#itineraryPage label {
     display: block;
     margin: 10px 0;
     font-size: 18px;
 }
 
-.submit-btn {
+#itineraryPage .submit-btn {
     background-color: #ff4d4d;
     color: white;
     padding: 15px 30px;
@@ -116,11 +118,28 @@ label {
     margin-top: 20px;
 }
 
-.submit-btn:hover {
+#itineraryPage .submit-btn:hover {
     background-color: #ff3333;
 }
 
 /* Hide the second page initially */
 #itineraryPage {
     display: none;
+}
+
+/* Specific button styles for the itinerary page */
+#itineraryPage .submit-btn {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+#itineraryPage .submit-btn:hover {
+    background-color: #ff3333;
 }
