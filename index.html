@@ -8,38 +8,28 @@
 </head>
 <body>
     <!-- First Page: Valentine's Invitation -->
+    <div class="container">  <!-- One container for both pages -->
     <div id="invitationPage">
-        <div class="container">
-            <header>
-                <h1>Valentine's Day Invitation</h1>
-            </header>
-    
-            <main>
-                <section class="message">
-                    <h2> Haerimahh, My Dear Vampire Baby 💖</h2>
-                    <p>Will you be my Valentine? 🥺 <br> Let’s make our 100th (&101st) day unforgettable! </p>
-                </section>
-    
-                <section class="date-details">
-                    <h3>Friday 14th itinerary:</h3>
-                    <p>🤩 A star-studded dinner at ******, just the two of us. <br> 🌟 City-night views to marvel at from ***** <br> 💕 Will you say yes?</p>
-                </section>
-    
-                <section class="date-details">
-                     <h3>Saturday 15th itinerary:</h3>
-                    <p>❔ Press Accept and we can plan it out 😉 </p>
-                </section>
-    
-                <button class="invite-btn" id="accept-btn">I Accept! Let's Go! 🥂</button>
-                <button class="invite-btn" id="reject-btn">Nah I'm good thanks 😭 </button>
-            </main>
+        <header>
+            <h1>Valentine's Day Invitation</h1>
+        </header>
+        <main>
+            <section class="message">
+                <h2>Haerimahh, My Dear Vampire Baby 💖</h2>
+                <p>Will you be my Valentine? 🥺 <br> Let’s make our 100th (&101st) day unforgettable!</p>
+            </section>
 
-            <footer>
-                <p>Created with love by your third korean fav 🥰 <br> Ft. JavaScript, HTML & CSS 😚 </p>
-            </footer>
-        </div>
+            <section class="date-details">
+                <h3>Friday 14th itinerary:</h3>
+                <p>🤩 A star-studded dinner at ******, just the two of us. <br> 🌟 City-night views to marvel at from ***** <br> 💕 Will you say yes?</p>
+            </section>
 
-    <!-- Second Page: Itinerary Selection -->
+            <button class="invite-btn" id="accept-btn">I Accept! Let's Go! 🥂</button>
+            <button class="invite-btn" id="reject-btn">Nah I'm good thanks 😭</button>
+        </main>
+    </div> <!-- End of Invitation Page -->
+
+    <!-- Second Page Moved Inside the Same Container -->
     <div id="itineraryPage" style="display: none;">
         <h1>Choose Your Valentine's Day Itinerary</h1>
         <div class="itinerary-container">
@@ -62,12 +52,14 @@
                 <br><br>
                 <button type="submit" class="submit-btn">Submit Itinerary</button>
             </form>
-
-            <footer>
-                <p>Created with love by your third korean fav 🥰 <br> Ft. JavaScript, HTML & CSS 😚 </p>
-            </footer>
         </div>
-    </div>
+    </div> <!-- End of Itinerary Page -->
+
+    <footer>
+        <p>Created with love by your third Korean fav 🥰 <br> Ft. JavaScript, HTML & CSS 😚</p>
+    </footer>
+</div> <!-- End of Container -->
+
 
     <script src="script.js"></script>
 </body>
