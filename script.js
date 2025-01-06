@@ -21,9 +21,18 @@ window.onload = function() {
         rejectBtn.addEventListener("click", function() {
             rejectCount++;
 
-            if (rejectCount >= 3) {
-                alert("Noooo please reconsider 😭💔");
-                location.reload(); // Reloads the page after 3 rejections
+           if (rejectCount === 3) {
+                alert("Nooo please reconsider 😢");
+            } else if (rejectCount >= 4) {
+                rejectBtn.disabled = true;
+                rejectBtn.style.opacity = "0.5";
+                rejectBtn.innerText = "Too late, you HAVE to say yes now 😉";
+
+                // Give her a few seconds before reloading for comedic effect
+                setTimeout(() => {
+                    alert("Alright, let's try again... 😘");
+                    location.reload();
+                }, 3000); // 3 seconds delay before reload
             } else {
                 alert("Are you sure? 😢");
 
@@ -34,18 +43,11 @@ window.onload = function() {
 
                 // Decrease reject button size (including padding)
                 let rejectSize = parseFloat(window.getComputedStyle(rejectBtn).fontSize);
-                let newRejectSize = Math.max(10, rejectSize - 3); // Prevents it from becoming too small
-                let newPadding = Math.max(5, rejectSize - 5) + "px " + Math.max(10, rejectSize - 10) + "px"; 
-        
+                let newRejectSize = Math.max(10, rejectSize - 3); // Prevents it from going too small
+                let newPadding = Math.max(5, rejectSize - 5) + "px " + Math.max(10, rejectSize - 10) + "px";
+
                 rejectBtn.style.fontSize = newRejectSize + "px";
                 rejectBtn.style.padding = newPadding;
-                
-                // Disable reject button if it gets too small
-                if (rejectSize <= 10) {
-                    rejectBtn.disabled = true;
-                    rejectBtn.style.opacity = "0.5";
-                    rejectBtn.innerText = "Too late, you HAVE to say yes now 😉";
-                }
             }
         });
     }
