@@ -93,6 +93,11 @@ header h1 {
 #reject-btn:hover {
     background-color: #d1006d; /* Darker red */
 }
+
+#accept-btn, #reject-btn {
+    transition: all 0.3s ease-in-out;
+}
+
 /* Footer */
 footer {
     margin-top: 20px;
