@@ -28,11 +28,10 @@ window.onload = function() {
                 rejectBtn.style.opacity = "0.5";
                 rejectBtn.innerText = "Too late, you HAVE to say yes now 😉";
 
-                // Give her a few seconds before reloading for comedic effect
+                // Optional: Delay before showing a final cute message (but no reload)
                 setTimeout(() => {
-                    alert("Alright, let's try again... 😘");
-                    location.reload();
-                }, 3000); // 3 seconds delay before reload
+                    alert("Guess there's no escape now... 💕");
+                }, 2000); // 2 seconds delay
             } else {
                 alert("Are you sure? 😢");
 
