@@ -32,11 +32,14 @@ window.onload = function() {
                 acceptBtn.style.fontSize = (acceptSize + 5) + "px";
                 acceptBtn.style.padding = (acceptSize + 5) + "px " + (acceptSize + 10) + "px";
 
-                // Decrease reject button size
+                // Decrease reject button size (including padding)
                 let rejectSize = parseFloat(window.getComputedStyle(rejectBtn).fontSize);
-                rejectBtn.style.fontSize = (rejectSize - 3) + "px";
-                rejectBtn.style.padding = (rejectSize - 3) + "px " + (rejectSize - 6) + "px";
-
+                let newRejectSize = Math.max(10, rejectSize - 3); // Prevents it from becoming too small
+                let newPadding = Math.max(5, rejectSize - 5) + "px " + Math.max(10, rejectSize - 10) + "px"; 
+        
+                rejectBtn.style.fontSize = newRejectSize + "px";
+                rejectBtn.style.padding = newPadding;
+                
                 // Disable reject button if it gets too small
                 if (rejectSize <= 10) {
                     rejectBtn.disabled = true;
