@@ -83,11 +83,11 @@ header h1 {
     background-color: #ff6f61; /* Warm red color */
     color: white;
     font-size: 1.2em;
-    padding: 15px 30px;
+    padding: 10px 20px; /* Slightly smaller to make shrink effect clearer */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, font-size 0.3s ease, padding 0.3s ease; /* Ensure smooth shrinking */
 }
 
 #reject-btn:hover {
