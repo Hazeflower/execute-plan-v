@@ -62,7 +62,7 @@ header h1 {
     color: #555;
 }
 
-/* Button styling for the invitation page */
+/* Accept Button styling for the invitation page */
 #accept-btn {
     background-color: #ff6f61; /* Warm red color */
     color: white;
@@ -78,6 +78,21 @@ header h1 {
     background-color: #d1006d; /* Darker red */
 }
 
+/* Reject Button styling for the invitation page */
+#reject-btn {
+    background-color: #ff6f61; /* Warm red color */
+    color: white;
+    font-size: 1.2em;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#reject-btn:hover {
+    background-color: #d1006d; /* Darker red */
+}
 /* Footer */
 footer {
     margin-top: 20px;
