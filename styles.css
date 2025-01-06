@@ -83,7 +83,7 @@ header h1 {
     background-color: #ff6f61; /* Warm red color */
     color: white;
     font-size: 1.2em;
-    padding: 10px 20px; /* Slightly smaller to make shrink effect clearer */
+    padding: 15px 30px; /* Slightly smaller to make shrink effect clearer */
     border: none;
     border-radius: 5px;
     cursor: pointer;
