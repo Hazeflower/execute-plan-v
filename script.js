@@ -1,4 +1,4 @@
-window.onload = function() {
+document.addEventListener("DOMContentLoaded", function() {
     const acceptBtn = document.getElementById("accept-btn");
     const rejectBtn = document.getElementById("reject-btn");
     const itineraryPage = document.getElementById("itineraryPage");
@@ -71,15 +71,20 @@ function toggleSelection(item) {
     item.classList.toggle("selected");
 
     let checkbox = item.querySelector("input[type='checkbox']");
+    if (!checkbox) {
+        console.error("Checkbox not found inside item:", item);
+        return; // Exit function if checkbox is missing
+    }
+
     checkbox.checked = !checkbox.checked;
 
-    // Ensure the tick icon is displayed
     let tick = item.querySelector(".tick");
-    if (checkbox.checked) {
-        tick.style.display = "block"; // Show tick
-    } else {
-        tick.style.display = "none"; // Hide tick
+    if (!tick) {
+        console.error("Tick element not found inside item:", item);
+        return;
     }
+
+    tick.style.display = checkbox.checked ? "block" : "none"; 
 }
 
 function submitSelection() {
