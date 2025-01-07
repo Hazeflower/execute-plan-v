@@ -144,7 +144,7 @@ footer {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    border: 2px solid #ff6f61; /* Light red border so items look clickable */
+    border: 2px solid transparent; /* No border initially */
     padding: 10px;
     border-radius: 10px;
     transition: 0.3s;
