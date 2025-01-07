@@ -138,12 +138,13 @@ footer {
 
 /* Styling for activity options */
 .itinerary-item {
-    position: relative; /* Allows absolute positioning of the tick */
+    position: relative; /* Ensures tick is positioned properly */
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
-    border: 2px solid transparent;
+    border: 2px solid #ff6f61; /* Light red border so items look clickable */
     padding: 10px;
     border-radius: 10px;
     transition: 0.3s;
@@ -162,26 +163,27 @@ footer {
     object-fit: cover;
     border-radius: 10px;
     transition: 0.3s;
-    border: 2px solid #ff6f61; /* Default border color */
 }
 
 /* Add tick when selected */
 .itinerary-item .tick {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #28a745;
-    color: white;
-    font-size: 16px;
-    padding: 5px;
+    top: 5px;
+    right: 5px;
+    font-size: 20px;
+    color: green;
+    font-weight: bold;
+    background: white;
+    padding: 3px 6px;
     border-radius: 50%;
-    display: none;
+    display: none; /* Initially hidden */
 }
 
 /* Change style when selected */
-.itinerary-item.selected .activity-img {
-    border: 4px solid #d1006d; /* Dark pink border */
-    transform: scale(1.1);
+.itinerary-item.selected {
+    border: 4px solid #d1006d; /* Dark pink to indicate selection */
+    background-color: #ffe6ea; /* Light pink to make it stand out */
+    transform: scale(1.05); /* Slight zoom effect */
 }
 
 .itinerary-item.selected .tick {
