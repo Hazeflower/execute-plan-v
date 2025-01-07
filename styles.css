@@ -187,5 +187,7 @@ footer {
 }
 
 .itinerary-item.selected .tick {
-    display: block;
+    display: flex !important; /* Ensures it's visible */
+    justify-content: center;
+    align-items: center;
 }
