@@ -53,18 +53,23 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Add event listeners to itinerary selection
-    document.querySelectorAll(".itinerary-item").forEach(item => {
-        item.addEventListener("click", function() {
-            toggleSelection(item);
+    const itineraryItems = document.querySelectorAll(".itinerary-item");
+    if (itineraryItems.length === 0) {
+        console.warn("No itinerary items found.");
+    } else {
+        itineraryItems.forEach(item => {
+            item.addEventListener("click", function() {
+                toggleSelection(item);
+            });
         });
-    });
+    }
 
     // Add event listener for submit button
     const submitButton = document.querySelector(".submit-btn");
     if (submitButton) {
         submitButton.addEventListener("click", submitSelection);
     }
-};
+});
 
 // Move these functions outside window.onload to ensure they are globally accessible
 function toggleSelection(item) {
