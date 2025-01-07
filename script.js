@@ -56,23 +56,24 @@ window.onload = function() {
         });
     }
 
-    if (itineraryForm) {
-        itineraryForm.addEventListener("submit", function(e) {
-            e.preventDefault(); // Prevent default form submission
-            
-            let selectedActivities = [];
-            const checkboxes = document.querySelectorAll('input[name="activity"]:checked');
-            
-            checkboxes.forEach(function(checkbox) {
-                selectedActivities.push(checkbox.value);
-            });
+    function toggleSelection(item) {
+    // Toggle the 'selected' class when clicked
+    item.classList.toggle("selected");
 
-            // Display the selected activities
-            if (selectedActivities.length > 0) {
-                alert('You selected: ' + selectedActivities.join(', '));
-            } else {
-                alert('Please select at least one activity.');
-            }
-        });
+    // Find the checkbox inside this item and toggle its checked state
+    let checkbox = item.querySelector("input[type='checkbox']");
+    checkbox.checked = !checkbox.checked;
+}
+
+function submitSelection() {
+    let selectedActivities = [];
+    document.querySelectorAll(".itinerary-item.selected").forEach(item => {
+        selectedActivities.push(item.querySelector("input").value);
+    });
+
+    if (selectedActivities.length > 0) {
+        alert("You have selected: " + selectedActivities.join(", "));
+    } else {
+        alert("Please select at least one activity!");
     }
-};
+}
