@@ -72,6 +72,14 @@ function toggleSelection(item) {
 
     let checkbox = item.querySelector("input[type='checkbox']");
     checkbox.checked = !checkbox.checked;
+
+    // Ensure the tick icon is displayed
+    let tick = item.querySelector(".tick");
+    if (checkbox.checked) {
+        tick.style.display = "block"; // Show tick
+    } else {
+        tick.style.display = "none"; // Hide tick
+    }
 }
 
 function submitSelection() {
