@@ -105,8 +105,6 @@ footer {
     color: #777;
 }
 
-/* New styles for the itinerary page */
-
 /* The container for the itinerary selection form */
 #itineraryPage .itinerary-container {
     background-color: #ffffff;
@@ -119,35 +117,12 @@ footer {
     width: 100%; /* Make sure it takes the full width of its container */
 }
 
-/* Styling for the form and checkboxes */
-#itineraryPage label {
-    display: block;
-    margin: 10px 0;
-    font-size: 18px;
-}
-
-#itineraryPage .submit-btn {
-    background-color: #ff4d4d;
-    color: white;
-    padding: 15px 30px;
-    font-size: 18px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    margin-top: 20px;
-}
-
-#itineraryPage .submit-btn:hover {
-    background-color: #ff3333;
-}
-
 /* Hide the second page initially */
 #itineraryPage {
     display: none;
 }
 
-/* Specific button styles for the itinerary page */
+/* Submit button styling */
 #itineraryPage .submit-btn {
     background-color: #ff4d4d;
     color: white;
@@ -162,4 +137,52 @@ footer {
 
 #itineraryPage .submit-btn:hover {
     background-color: #ff3333;
+}
+
+/* 🎨 Image-Based Itinerary Selection */
+.image-selection {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.image-option {
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.image-option:hover {
+    transform: scale(1.05);
+}
+
+/* Hide default checkboxes but keep functionality */
+.image-option input {
+    display: none;
+}
+
+/* Style the images as buttons */
+.image-option img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    border: 3px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+/* Highlight selected image */
+.image-option.selected img {
+    border-color: #ff4d4d; /* Red border when selected */
+}
+
+/* Label under images */
+.image-option label {
+    display: block;
+    margin-top: 5px;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
 }
