@@ -3,7 +3,6 @@ window.onload = function() {
     const rejectBtn = document.getElementById("reject-btn");
     const itineraryPage = document.getElementById("itineraryPage");
     const invitationPage = document.getElementById("invitationPage");
-    const itineraryForm = document.getElementById("itineraryForm");
 
     let rejectCount = 0; // Counter for tracking rejection clicks
 
@@ -11,7 +10,6 @@ window.onload = function() {
     if (acceptBtn && itineraryPage && invitationPage) {
         acceptBtn.addEventListener("click", function() {
             alert("Yay! Can't wait for our special date! 💖");
-            // Hide invitation page and show itinerary page
             invitationPage.style.display = "none";
             itineraryPage.style.display = "block";
         });
@@ -21,22 +19,20 @@ window.onload = function() {
         rejectBtn.addEventListener("click", function() {
             rejectCount++;
 
-           if (rejectCount === 3) {
+            if (rejectCount === 3) {
                 alert("Nooo please reconsider 😢");
             } else if (rejectCount >= 4) {
                 rejectBtn.disabled = true;
                 rejectBtn.style.opacity = "0.5";
                 rejectBtn.innerText = "Too late, you HAVE to say yes now 😉";
 
-                // Delay before showing a final cute message (but no reload)
                 setTimeout(() => {
                     alert("Guess there's no escape now... 💕");
-                }, 1000); // 1 second delay
+                }, 1000); 
 
-               // Second delayed alert (after 5 seconds)
                 setTimeout(() => {
                     alert("But if you really are busy, please tell me 😢");
-                }, 5000); // 5 seconds delay
+                }, 5000);
             } else {
                 alert("Are you sure? 😢");
 
@@ -47,7 +43,7 @@ window.onload = function() {
 
                 // Decrease reject button size (including padding)
                 let rejectSize = parseFloat(window.getComputedStyle(rejectBtn).fontSize);
-                let newRejectSize = Math.max(10, rejectSize - 3); // Prevents it from going too small
+                let newRejectSize = Math.max(10, rejectSize - 3);
                 let newPadding = Math.max(5, rejectSize - 5) + "px " + Math.max(10, rejectSize - 10) + "px";
 
                 rejectBtn.style.fontSize = newRejectSize + "px";
@@ -56,11 +52,24 @@ window.onload = function() {
         });
     }
 
-    function toggleSelection(item) {
-    // Toggle the 'selected' class when clicked
+    // Add event listeners to itinerary selection
+    document.querySelectorAll(".itinerary-item").forEach(item => {
+        item.addEventListener("click", function() {
+            toggleSelection(item);
+        });
+    });
+
+    // Add event listener for submit button
+    const submitButton = document.querySelector(".submit-btn");
+    if (submitButton) {
+        submitButton.addEventListener("click", submitSelection);
+    }
+};
+
+// Move these functions outside window.onload to ensure they are globally accessible
+function toggleSelection(item) {
     item.classList.toggle("selected");
 
-    // Find the checkbox inside this item and toggle its checked state
     let checkbox = item.querySelector("input[type='checkbox']");
     checkbox.checked = !checkbox.checked;
 }
