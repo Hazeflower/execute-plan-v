@@ -54,10 +54,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Add event listeners to itinerary selection
     document.querySelectorAll(".itinerary-item").forEach(item => {
-    item.addEventListener("click", function() {
-        this.classList.toggle("selected"); // Toggle selection
+        item.addEventListener("click", function () {
+            toggleSelection(this); // Correctly toggle the selection
+        });
     });
-});
 
 
     // Add event listener for submit button
