@@ -154,25 +154,37 @@ footer {
     text-align: center;
 }
 
+/* Ensure tick is properly positioned */
+.itinerary-item .tick {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 18px;
+    color: green;
+    font-weight: bold;
+    background: white;
+    padding: 4px 6px;
+    border-radius: 50%;
+    display: none; /* Initially hidden */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure tick appears correctly when selected */
+.itinerary-item.selected {
+    border: 4px solid #d1006d; /* Dark pink to indicate selection */
+    background-color: #ffe6ea;
+    transform: scale(1.1); /* Slight zoom effect */
+}
+
+.itinerary-item.selected .tick {
+    display: flex !important; /* Ensure tick is shown */
+    justify-content: center;
+    align-items: center;
+}
 /* Add subtle hover effect */
 .itinerary-item:hover {
     transform: scale(1.07);
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Selected Itinerary Item */
-.itinerary-item.selected {
-    border: 4px solid #d1006d;
-    background-color: #ffe6ea;
-    transform: scale(1.1); /* More emphasis */
-}
-
-/* Improve Tick Visibility */
-.itinerary-item .tick {
-    top: 8px;
-    right: 8px;
-    font-size: 22px;
-    padding: 5px 8px;
 }
 
 /* Image Styling */
