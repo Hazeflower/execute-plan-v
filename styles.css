@@ -105,101 +105,110 @@ footer {
     color: #777;
 }
 
-/* Grid layout for itinerary selection */
+/* Category Section Styling */
+.itinerary-category {
+    margin-top: 40px; /* Space between sections */
+    padding-top: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Ribbon Style for Category Titles */
+.category-title {
+    background: linear-gradient(to right, #ff6f61, #d1006d); /* Gradient effect */
+    color: white;
+    font-size: 1.8em;
+    padding: 12px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.category-title:hover {
+    transform: scale(1.05); /* Slight hover effect */
+}
+
+/* Improved Grid Layout */
 .itinerary-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid */
-    gap: 20px; /* Space between grid items */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 30px; /* Increased gap for better spacing */
     justify-content: center;
-    padding: 20px;
+    padding: 30px 20px;
 }
 
-/* Hide the second page initially */
-#itineraryPage {
-    display: none;
-}
-
-/* Submit button styling */
-#itineraryPage .submit-btn {
-    background-color: #ff4d4d;
-    color: white;
-    padding: 15px 30px;
-    font-size: 18px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    margin-top: 20px;
-}
-
-#itineraryPage .submit-btn:hover {
-    background-color: #ff3333;
-}
-
-/* Styling for activity options */
+/* Improved Itinerary Item Styling */
 .itinerary-item {
-    position: relative; /* Ensures tick is positioned properly */
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    border: 2px solid transparent; /* No border initially */
-    padding: 10px;
-    border-radius: 10px;
-    transition: 0.3s;
+    border: 2px solid transparent;
+    padding: 15px;
+    border-radius: 12px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background: #fff;
     text-align: center;
 }
 
-/* Hide default checkboxes */
-.itinerary-item input {
-    display: none;
+/* Add subtle hover effect */
+.itinerary-item:hover {
+    transform: scale(1.07);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Style images */
-.activity-img {
-    pointer-events: none; /* Prevents the image from blocking clicks */ 
-    width: 120px; /* Adjust size as needed */
-    height: 120px;
-    object-fit: cover;
-    border-radius: 10px;
-    transition: 0.3s;
-}
-
-/* Add tick when selected */
-.itinerary-item .tick {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    font-size: 20px;
-    color: green;
-    font-weight: bold;
-    background: white;
-    padding: 3px 6px;
-    border-radius: 50%;
-    display: none; /* Initially hidden */
-}
-
-/* Change style when selected */
+/* Selected Itinerary Item */
 .itinerary-item.selected {
-    border: 4px solid #d1006d; /* Dark pink to indicate selection */
-    background-color: #ffe6ea; /* Light pink to make it stand out */
-    transform: scale(1.05); /* Slight zoom effect */
+    border: 4px solid #d1006d;
+    background-color: #ffe6ea;
+    transform: scale(1.1); /* More emphasis */
 }
 
-.itinerary-item.selected .tick {
-    display: flex !important; /* Ensures it's visible */
-    justify-content: center;
-    align-items: center;
+/* Improve Tick Visibility */
+.itinerary-item .tick {
+    top: 8px;
+    right: 8px;
+    font-size: 22px;
+    padding: 5px 8px;
 }
 
+/* Image Styling */
+.activity-img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.itinerary-item:hover .activity-img {
+    transform: scale(1.05);
+}
+
+/* Spacing Between Image and Text */
 .itinerary-item span {
-    display: block;
-    width: 100%;
-    text-align: center;
-    min-height: 24px; /* Ensures all text occupies the same space */
-    line-height: 1.2; /* Adjusts line spacing */
-    font-size: 14px;
-    word-wrap: break-word; /* Allows breaking long words */
-    margin-top: 10px; /* Adjust this value to increase spacing */
+    margin-top: 12px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* Submit Button Enhancement */
+.submit-btn {
+    background: linear-gradient(to right, #ff4d4d, #d1006d);
+    color: white;
+    padding: 15px 35px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    margin-top: 30px;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(to right, #ff3333, #b3005c);
+    transform: scale(1.08);
 }
