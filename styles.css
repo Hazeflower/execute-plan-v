@@ -201,5 +201,5 @@ footer {
     line-height: 1.2; /* Adjusts line spacing */
     font-size: 14px;
     word-wrap: break-word; /* Allows breaking long words */
-    margin-top: 20px; /* Adjust this value to increase spacing */
+    margin-top: 10px; /* Adjust this value to increase spacing */
 }
