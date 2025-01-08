@@ -54,15 +54,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Add event listeners to itinerary selection
     const itineraryItems = document.querySelectorAll(".itinerary-item");
-    if (itineraryItems.length === 0) {
-        console.warn("No itinerary items found.");
-    } else {
-        itineraryItems.forEach(item => {
+    itineraryItems.forEach(item => {
             item.addEventListener("click", function() {
                 toggleSelection(item);
             });
         });
-    }
 
     // Add event listener for submit button
     const submitButton = document.querySelector(".submit-btn");
@@ -89,7 +85,7 @@ function toggleSelection(item) {
         return;
     }
 
-    tick.style.display = checkbox.checked ? "block" : "none"; 
+    tick.style.display = checkbox.checked ? "flex" : "none"; 
 }
 
 function submitSelection() {
