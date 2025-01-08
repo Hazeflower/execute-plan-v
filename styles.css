@@ -197,8 +197,9 @@ footer {
     display: block;
     width: 100%;
     text-align: center;
-    min-height: 40px; /* Ensures all text occupies the same space */
+    min-height: 24px; /* Ensures all text occupies the same space */
     line-height: 1.2; /* Adjusts line spacing */
     font-size: 14px;
     word-wrap: break-word; /* Allows breaking long words */
+    margin-top: 10px; /* Adjust this value to increase spacing */
 }
