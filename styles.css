@@ -192,3 +192,13 @@ footer {
     justify-content: center;
     align-items: center;
 }
+
+.itinerary-item span {
+    display: block;
+    width: 100%;
+    text-align: center;
+    min-height: 40px; /* Ensures all text occupies the same space */
+    line-height: 1.2; /* Adjusts line spacing */
+    font-size: 14px;
+    word-wrap: break-word; /* Allows breaking long words */
+}
