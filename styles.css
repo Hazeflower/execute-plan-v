@@ -158,6 +158,7 @@ footer {
 
 /* Style images */
 .activity-img {
+    pointer-events: none; /* Prevents the image from blocking clicks */ 
     width: 120px; /* Adjust size as needed */
     height: 120px;
     object-fit: cover;
