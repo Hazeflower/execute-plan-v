@@ -37,37 +37,53 @@
     <!-- Second Page: Itinerary page once accepted -->
     <div id="itineraryPage" style="display: none;">
         <h1>Choose Your Valentine's Day Itinerary</h1>
-        <div class="itinerary-grid">
+
+        <!-- Food & Dining Section -->
+        <div class="itinerary-category">
+            <h2 class="category-title">Food & Dining</h2>
+            <div class="itinerary-grid">
+                <label class="itinerary-item">
+                    <input type="checkbox" name="activity" value="Romantic Dinner" hidden>
+                    <img src="images/Romantic Dinner.jpg" alt="Romantic Dinner" class="activity-img">
+                    <div class="tick">✔</div>
+                    <span>Romantic Dinner 🍽️</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Activities Section -->
+        <div class="itinerary-category">
+            <h2 class="category-title">Activities</h2>
+            <div class="itinerary-grid">
+                <label class="itinerary-item">
+                    <input type="checkbox" name="activity" value="Beach Walk" hidden>
+                    <img src="images/Beach Walk.jpg" alt="Beach Walk" class="activity-img">
+                    <div class="tick">✔</div>
+                    <span>Beach Walk 🌊</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Quality Time Section -->
+        <div class="itinerary-category">
+            <h2 class="category-title">Quality Time</h2>
+            <div class="itinerary-grid">
+                <label class="itinerary-item">
+                    <input type="checkbox" name="activity" value="Movie Night" hidden>
+                    <img src="images/Movie.jpg" alt="Cinema" class="activity-img">
+                    <div class="tick">✔</div>
+                    <span>Movie Night 🎬</span>
+                </label>
+
+                <label class="itinerary-item">
+                    <input type="checkbox" name="activity" value="Stargazing" hidden>
+                    <img src="images/Stargazing.jpg" alt="Stargazing" class="activity-img">
+                    <div class="tick">✔</div>
+                    <span>Stargazing ✨</span>
+                </label>
+            </div>
+        </div>
         
-        <div class="itinerary-item">
-            <input type="checkbox" name="activity" value="Movie Night" hidden>
-            <img src="images/Movie.jpg" alt="Cinema" class="activity-img">
-            <div class="tick">✔</div>
-            <span>Movie Night 🎬</span>
-        </div>
-
-        <div class="itinerary-item">
-            <input type="checkbox" name="activity" value="Romantic Dinner" hidden>
-            <img src="images/Romantic Dinner.jpg" alt="Romantic Dinner" class="activity-img">
-            <div class="tick">✔</div>
-            <span>Romantic Dinner 🍽️</span>
-        </div>
-
-        <div class="itinerary-item">
-            <input type="checkbox" name="activity" value="Beach Walk" hidden>
-            <img src="images/Beach Walk.jpg" alt="Beach Walk" class="activity-img">
-            <div class="tick">✔</div>
-            <span>Beach Walk 🌊</span>
-        </div>
-
-        <div class="itinerary-item">
-            <input type="checkbox" name="activity" value="Stargazing" hidden>
-            <img src="images/Stargazing.jpg" alt="Stargazing" class="activity-img">
-            <div class="tick">✔</div>
-            <span>Stargazing ✨</span>
-        </div>
-
-    </div> 
     <button type="submit" class="submit-btn" onclick="submitSelection()">Confirm Selection</button>
     </div> <!-- End of Itinerary Page -->
 
