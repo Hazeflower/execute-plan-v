@@ -171,8 +171,8 @@ footer {
 
 /* Ensure tick appears correctly when selected */
 .itinerary-item.selected {
-    border: 4px solid #d1006d; /* Dark pink to indicate selection */
-    background-color: #ffe6ea;
+    border: 4px solid #d1006d !important; /* Dark pink to indicate selection */
+    background-color: #ffe6ea !important;
     transform: scale(1.1); /* Slight zoom effect */
     position: relative; /* Make sure tick is correctly placed */
 }
@@ -182,6 +182,12 @@ footer {
     justify-content: center;
     align-items: center;
 }
+
+/* Ensure checkboxes don't interfere visually */
+.itinerary-item input[type="checkbox"] {
+    display: none; /* Hide default checkboxes */
+}
+
 /* Add subtle hover effect */
 .itinerary-item:hover {
     transform: scale(1.07);
