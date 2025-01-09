@@ -53,12 +53,13 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Event delegation for itinerary selection (more efficient & fixes selection issue)
-    document.querySelectorAll(".itinerary-item").forEach(item => {
-        item.addEventListener("click", function () {
-            toggleSelection(this);
-        });
+    document.addEventListener("click", function (event) {
+        let item = event.target.closest(".itinerary-item");
+        if (item) {
+            toggleSelection(item);
+        }
     });
-
+    
     // Add event listener for submit button
     const submitButton = document.querySelector(".submit-btn");
     if (submitButton) {
