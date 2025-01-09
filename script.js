@@ -72,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Add event listener for submit button
     const submitButton = document.querySelector(".submit-btn");
     if (submitButton) {
+        submitButton.removeEventListener("click", submitSelection); // Prevent duplicate event binding
         submitButton.addEventListener("click", submitSelection);
     }
 });
@@ -101,7 +102,9 @@ function toggleSelection(item) {
 }
 
 // Submit selection function
-function submitSelection() {
+function submitSelection(event) {
+    event.preventDefault(); // Prevent any accidental multiple triggers
+    
     let selectedActivities = [];
     document.querySelectorAll(".itinerary-item.selected").forEach(item => {
         let inputElement = item.querySelector("input[type='checkbox']");
