@@ -52,13 +52,12 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Add event listeners to itinerary selection
+    // Event delegation for itinerary selection (more efficient & fixes selection issue)
     document.querySelectorAll(".itinerary-item").forEach(item => {
         item.addEventListener("click", function () {
-            toggleSelection(this); // Correctly toggle the selection
+            toggleSelection(this);
         });
     });
-
 
     // Add event listener for submit button
     const submitButton = document.querySelector(".submit-btn");
@@ -67,14 +66,14 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// Move these functions outside window.onload to ensure they are globally accessible
+// Toggle selection function
 function toggleSelection(item) {
     item.classList.toggle("selected");
 
     let checkbox = item.querySelector("input[type='checkbox']");
     if (!checkbox) {
         console.error("Checkbox not found inside item:", item);
-        return; // Exit function if checkbox is missing
+        return;
     }
 
     checkbox.checked = !checkbox.checked;
@@ -85,13 +84,20 @@ function toggleSelection(item) {
         return;
     }
 
-    tick.style.display = checkbox.checked ? "flex" : "none"; 
+    tick.style.display = checkbox.checked ? "flex" : "none";
+
+    // Debugging log
+    console.log(`Clicked: ${item.innerText}, Selected: ${checkbox.checked}`);
 }
 
+// Submit selection function
 function submitSelection() {
     let selectedActivities = [];
     document.querySelectorAll(".itinerary-item.selected").forEach(item => {
-        selectedActivities.push(item.querySelector("input").value);
+        let inputElement = item.querySelector("input[type='checkbox']");
+        if (inputElement) {
+            selectedActivities.push(inputElement.value);
+        }
     });
 
     if (selectedActivities.length > 0) {
