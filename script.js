@@ -86,7 +86,7 @@ function toggleSelection(item) {
         return;
     }
 
-    checkbox.checked = !checkbox.checked;
+    checkbox.checked = item.classList.contains("selected");
 
     let tick = item.querySelector(".tick");
     if (!tick) {
