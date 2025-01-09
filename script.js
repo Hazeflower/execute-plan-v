@@ -54,11 +54,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Event delegation for itinerary selection (more efficient & fixes selection issue)
     document.addEventListener("click", function (event) {
-        let item = event.target.closest(".itinerary-item");
-        if (item) {
-            toggleSelection(item);
-        }
-    });
+    let item = event.target.closest(".itinerary-item");
+    if (!item) return; // Ensure only clicks inside the item are processed
+
+    // Check if the click happened inside an interactive element
+    if (event.target.tagName === "INPUT") return; // Avoid issues with checkboxes
+
+    // Manually trigger the checkbox selection
+    let checkbox = item.querySelector("input[type='checkbox']");
+    if (checkbox) {
+        checkbox.checked = !checkbox.checked;
+    }
+
+    toggleSelection(item);
+});
     
     // Add event listener for submit button
     const submitButton = document.querySelector(".submit-btn");
