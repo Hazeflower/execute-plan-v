@@ -1,3 +1,8 @@
+let map;
+let markers = [];
+let directionsService;
+let directionsRenderer;
+
 document.addEventListener("DOMContentLoaded", function() {
     const acceptBtn = document.getElementById("accept-btn");
     const rejectBtn = document.getElementById("reject-btn");
@@ -77,6 +82,18 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+// **Initialize Google Map**
+function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 51.5074, lng: -0.1278 }, // London as the base map
+        zoom: 12,
+    });
+
+    directionsService = new google.maps.DirectionsService();
+    directionsRenderer = new google.maps.DirectionsRenderer();
+    directionsRenderer.setMap(map);
+}
+
 // Toggle selection function
 function toggleSelection(item) {
     item.classList.toggle("selected");
@@ -99,6 +116,41 @@ function toggleSelection(item) {
 
     // Debugging log
     console.log(`Clicked: ${item.innerText}, Selected: ${checkbox.checked}`);
+
+    updateMap();
+}
+
+// **Update Google Map with selected locations**
+function updateMap() {
+    clearMarkers();
+
+    let selectedItems = document.querySelectorAll(".itinerary-item.selected");
+    let bounds = new google.maps.LatLngBounds();
+    
+    selectedItems.forEach(item => {
+        let lat = parseFloat(item.getAttribute("data-lat"));
+        let lng = parseFloat(item.getAttribute("data-lng"));
+        if (!isNaN(lat) && !isNaN(lng)) {
+            let position = { lat, lng };
+            let marker = new google.maps.Marker({
+                position,
+                map,
+                title: item.innerText,
+            });
+            markers.push(marker);
+            bounds.extend(position);
+        }
+    });
+
+    if (markers.length > 0) {
+        map.fitBounds(bounds);
+    }
+}
+
+// **Clear all markers from map**
+function clearMarkers() {
+    markers.forEach(marker => marker.setMap(null));
+    markers = [];
 }
 
 // Submit selection function
@@ -115,7 +167,51 @@ function submitSelection(event) {
 
     if (selectedActivities.length > 0) {
         alert("You have selected: " + selectedActivities.join(", "));
+        showRoute();
     } else {
         alert("Please select at least one activity!");
     }
+}
+
+// **Show route between selected locations (Future Improvement)**
+function showRoute() {
+    let selectedItems = document.querySelectorAll(".itinerary-item.selected");
+    if (selectedItems.length < 2) return;
+
+    let waypoints = [];
+    selectedItems.forEach((item, index) => {
+        let lat = parseFloat(item.getAttribute("data-lat"));
+        let lng = parseFloat(item.getAttribute("data-lng"));
+        if (!isNaN(lat) && !isNaN(lng) && index !== 0 && index !== selectedItems.length - 1) {
+            waypoints.push({
+                location: { lat, lng },
+                stopover: true,
+            });
+        }
+    });
+
+    let origin = {
+        lat: parseFloat(selectedItems[0].getAttribute("data-lat")),
+        lng: parseFloat(selectedItems[0].getAttribute("data-lng"))
+    };
+    
+    let destination = {
+        lat: parseFloat(selectedItems[selectedItems.length - 1].getAttribute("data-lat")),
+        lng: parseFloat(selectedItems[selectedItems.length - 1].getAttribute("data-lng"))
+    };
+
+    let request = {
+        origin,
+        destination,
+        waypoints,
+        travelMode: google.maps.TravelMode.DRIVING,
+    };
+
+    directionsService.route(request, function (response, status) {
+        if (status === google.maps.DirectionsStatus.OK) {
+            directionsRenderer.setDirections(response);
+        } else {
+            alert("Directions request failed. Please check locations.");
+        }
+    });
 }
