@@ -231,3 +231,25 @@ footer {
     background: linear-gradient(to right, #ff3333, #b3005c);
     transform: scale(1.08);
 }
+
+/* === MAP STYLES === */
+#map {
+    height: 400px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 15px;
+    border: 3px solid #ff4d79;
+}
+
+/* Custom Map Marker */
+.custom-marker {
+    background-image: url('https://raw.githubusercontent.com/Hazeflower/execute-plan-v/tree/main/images/Heart marker.png'); /* Ensure the heart icon is added */
+    background-size: cover;
+    width: 40px;
+    height: 40px;
+}
+
+/* Google Map Custom Theme */
+.gm-style {
+    filter: hue-rotate(300deg) brightness(90%) saturate(120%);
+}
