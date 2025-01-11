@@ -109,7 +109,7 @@ document.getElementById("accept-btn").addEventListener("click", function() {
 
 // Initialize PlacesService AFTER map is ready
     placesService = new google.maps.places.PlacesService(map);
-}
+});
 
 // Ensure updateMap does not run if placesService is undefined
 function updateMap(placeId) {
