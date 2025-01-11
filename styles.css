@@ -64,40 +64,20 @@ header h1 {
     color: #555;
 }
 
-/* Accept Button styling for the invitation page */
-#accept-btn {
-    background-color: #ff6f61; /* Warm red color */
-    color: white;
-    font-size: 1.2em;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#accept-btn:hover {
-    background-color: #d1006d; /* Darker red */
-}
-
-/* Reject Button styling for the invitation page */
-#reject-btn {
-    background-color: #ff6f61; /* Warm red color */
-    color: white;
-    font-size: 1.2em;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, font-size 0.3s ease, padding 0.3s ease; /* Ensure smooth shrinking */
-}
-
-#reject-btn:hover {
-    background-color: #d1006d; /* Darker red */
-}
-
+/* Invitation Page Buttons */
 #accept-btn, #reject-btn {
+    background-color: #ff6f61;
+    color: white;
+    font-size: 1.2em;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     transition: all 0.3s ease-in-out;
+}
+
+#accept-btn:hover, #reject-btn:hover {
+    background-color: #d1006d;
 }
 
 /* Footer */
@@ -107,12 +87,13 @@ footer {
     color: #777;
 }
 
+/* -------------- ITINERARY PAGE FIXES ---------------- */
+
 /* Main Container for Itinerary */
 .main-container {
     display: flex;
-    flex-wrap: row; /* Arrange elements in a row */
-    justify-content: space-between;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
     width: 90%;
     max-width: 1200px;
     padding: 20px;
@@ -120,24 +101,52 @@ footer {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* White Box: Centers content */
+.white-box {
+    width: 80%;
+    max-width: 1200px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Flexbox Layout for Itinerary Page */
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
     gap: 20px;
 }
 
 /* Left Side: Activities */
 .itinerary-left {
-    flex: 1; /* Takes available space */
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
-/* Map Container */
-.map-container {
+/* Right Side: Map */
+.map-section {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+}
+
+/* Map Container */
+.map-container {
+    width: 100%;
+    height: 400px;
+    background: lightgray;
+    border-radius: 10px;
 }
 
 /* Map Styling */
@@ -155,155 +164,47 @@ footer {
     max-width: 60%;
 }
 
-/* Itinerary Category Styling */
-.itinerary-category {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.category-title {
-    font-size: 1.8em;
-    background: linear-gradient(to right, #ff6f61, #d1006d);
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.category-title:hover {
-    transform: scale(1.05); /* Slight hover effect */
-}
-
-/* Improved Grid Layout */
-.itinerary-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px; /* Increased gap for better spacing */
-    justify-content: center;
-    padding: 20px;
-}
-
-/* Improved Itinerary Item Styling */
-.itinerary-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    border: 2px solid transparent;
-    padding: 15px;
-    border-radius: 12px;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    background: #fff;
-    text-align: center;
-}
-
-/* Ensure tick is properly positioned */
-.itinerary-item .tick {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    font-size: 18px;
-    color: green;
-    font-weight: bold;
-    background: white;
-    padding: 4px 6px;
-    border-radius: 50%;
-    display: none; /* Initially hidden */
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Ensure tick appears correctly when selected */
-.itinerary-item.selected {
-    border: 3px solid #d1006d !important; /* Dark pink to indicate selection */
-    background-color: #ffe6ea !important;
-    transform: scale(1.05); /* Slight zoom effect */
-}
-
-.itinerary-item.selected .tick {
-    display: flex !important; /* Ensure tick is shown */
-    justify-content: center;
-    align-items: center;
-}
-
-/* Ensure checkboxes don't interfere visually */
-.itinerary-item input[type="checkbox"] {
-    display: none; /* Hide default checkboxes */
-}
-
-/* Add subtle hover effect */
-.itinerary-item:hover {
-    transform: scale(1.07);
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Image Styling */
-.activity-img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 10px;
-    transition: transform 0.3s ease-in-out;
-}
-
-.itinerary-item:hover .activity-img {
-    transform: scale(1.05);
-}
-
-/* Spacing Between Image and Text */
-.itinerary-item span {
-    margin-top: 12px;
-    font-size: 15px;
-    font-weight: bold;
-}
-
-/* Submit Button Enhancement */
+/* Submit Button */
 .submit-btn {
     background: linear-gradient(to right, #ff4d4d, #d1006d);
     color: white;
     padding: 12px 20px;
-    font-size: 1.2cm;
+    font-size: 1.2em;
     border: none;
     cursor: pointer;
     border-radius: 8px;
     transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .submit-btn:hover {
     background: linear-gradient(to right, #ff3333, #b3005c);
 }
 
-/* Custom Map Marker */
-.custom-marker {
-    background-image: url('https://raw.githubusercontent.com/Hazeflower/execute-plan-v/main/images/heart-marker.png'); /* Ensure the heart icon is added */
-    background-size: cover;
-    width: 40px;
-    height: 40px;
-}
-
-/* Google Map Custom Theme */
-.gm-style {
-    filter: hue-rotate(300deg) brightness(90%) saturate(120%);
+/* Footer inside white box */
+.white-box .footer {
+    text-align: center;
+    width: 100%;
+    padding: 10px 0;
+    margin-top: 20px;
 }
 
 /* Responsive Fixes */
 @media (max-width: 900px) {
-    .main-container {
-        flex-direction: column; /* Stack items vertically on small screens */
+    .content-wrapper {
+        flex-direction: column;
         align-items: center;
     }
 
-    .itinerary-left {
+    .itinerary-left, .map-section {
         width: 100%;
     }
 
     .map-container {
-        width: 100%;
+        height: 350px;
     }
 
     #map {
-        height: 400px;
+        height: 350px;
     }
 }
