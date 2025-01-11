@@ -272,7 +272,7 @@ footer {
     align-items: center;
     justify-content: flex-start;
     min-width: 450px; /* Prevents map from getting squished */
-    margin-top: 300px; /* Pushes it down */
+    margin-top: 280px; /* Pushes it down */
 }
 
 /* Map Container */
