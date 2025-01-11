@@ -84,6 +84,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // **Initialize Google Map**
 function initMap() {
+    if (!document.getElementById("map")) {
+        console.error("Map element not found!");
+        return;
+    }
+    
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 51.5074, lng: -0.1278 }, // London as the base map
         zoom: 12,
@@ -93,6 +98,13 @@ function initMap() {
     directionsRenderer = new google.maps.DirectionsRenderer();
     directionsRenderer.setMap(map);
 }
+
+// Ensure the map reloads when switching to the itinerary page
+document.getElementById("accept-btn").addEventListener("click", function() {
+    setTimeout(() => {
+        initMap();
+    }, 500); // Delay ensures div is visible before map loads
+});
 
 // Toggle selection function
 function toggleSelection(item) {
