@@ -1,4 +1,5 @@
 let map;
+let placesService;
 let markers = [];
 let directionsService;
 let directionsRenderer;
@@ -105,6 +106,27 @@ document.getElementById("accept-btn").addEventListener("click", function() {
         initMap();
     }, 500); // Delay ensures div is visible before map loads
 });
+
+// Initialize PlacesService AFTER map is ready
+    placesService = new google.maps.places.PlacesService(map);
+}
+
+// Ensure updateMap does not run if placesService is undefined
+function updateMap(placeId) {
+    if (!placesService) {
+        console.error("Google PlacesService is not initialized yet!");
+        return;
+    }
+
+    placesService.getDetails({ placeId }, (place, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            map.setCenter(place.geometry.location);
+            map.setZoom(14);
+        } else {
+            console.error("Failed to retrieve place details:", status);
+        }
+    });
+}
 
 // Toggle selection function
 function toggleSelection(item) {
