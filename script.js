@@ -93,7 +93,7 @@ function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 51.5074, lng: -0.1278 }, // London as the base map
         zoom: 12,
-    }
+    });
                               
     directionsService = new google.maps.DirectionsService();
     directionsRenderer = new google.maps.DirectionsRenderer();
