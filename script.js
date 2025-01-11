@@ -98,7 +98,7 @@ function initMap() {
     directionsService = new google.maps.DirectionsService();
     directionsRenderer = new google.maps.DirectionsRenderer();
     directionsRenderer.setMap(map);
-});
+}
 
 // Ensure the map reloads when switching to the itinerary page
 document.getElementById("accept-btn").addEventListener("click", function() {
