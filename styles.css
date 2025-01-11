@@ -37,6 +37,69 @@ header h1 {
     margin-bottom: 20px;
 }
 
+/* Romantic message section */
+.message h2 {
+    font-size: 1.8em;
+    color: #d1006d;
+    margin-bottom: 10px;
+}
+
+.message p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+/* Date details */
+.date-details {
+    margin: 20px 0;
+}
+
+.date-details h3 {
+    font-size: 1.5em;
+    color: #d1006d;
+}
+
+.date-details p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+/* Accept Button styling */
+#accept-btn {
+    background-color: #ff6f61; /* Warm red color */
+    color: white;
+    font-size: 1.2em;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#accept-btn:hover {
+    background-color: #d1006d; /* Darker red */
+}
+
+/* Reject Button styling */
+#reject-btn {
+    background-color: #ff6f61;
+    color: white;
+    font-size: 1.2em;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, font-size 0.3s ease, padding 0.3s ease;
+}
+
+#reject-btn:hover {
+    background-color: #d1006d;
+}
+
+#accept-btn, #reject-btn {
+    transition: all 0.3s ease-in-out;
+}
+
 /* Footer */
 footer {
     margin-top: 20px;
@@ -48,15 +111,16 @@ footer {
 
 /* White Box Container */
 .white-box {
-    width: 80%;
+    width: 85%;
     max-width: 1200px;
     background: white;
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 50px auto; /* Centered */
 }
 
 /* Layout for Itinerary Page */
@@ -64,7 +128,7 @@ footer {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    gap: 20px;
+    gap: 30px;
 }
 
 /* Left Side: Activities */
