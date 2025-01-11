@@ -120,32 +120,41 @@ function toggleSelection(item) {
     updateMap();
 }
 
-// **Update Google Map with selected locations**
+// **Update Map dynamically using Place Names**
 function updateMap() {
     clearMarkers();
-
     let selectedItems = document.querySelectorAll(".itinerary-item.selected");
     let bounds = new google.maps.LatLngBounds();
-    
-    selectedItems.forEach(item => {
-        let lat = parseFloat(item.getAttribute("data-lat"));
-        let lng = parseFloat(item.getAttribute("data-lng"));
-        if (!isNaN(lat) && !isNaN(lng)) {
-            let position = { lat, lng };
-            let marker = new google.maps.Marker({
-                position,
-                map,
-                title: item.innerText,
-            });
-            markers.push(marker);
-            bounds.extend(position);
-        }
-    });
+    let service = new google.maps.places.PlacesService(map);
 
-    if (markers.length > 0) {
-        map.fitBounds(bounds);
-    }
+    selectedItems.forEach(item => {
+        let placeName = item.getAttribute("data-place");
+        if (!placeName) return;
+
+        service.findPlaceFromQuery(
+            { query: placeName, fields: ["name", "geometry"] },
+            function(results, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK && results[0]) {
+                    let position = results[0].geometry.location;
+                    let marker = new google.maps.Marker({
+                        position,
+                        map,
+                        title: results[0].name,
+                        icon: {
+                            url: "images/heart-marker.png",
+                            scaledSize: new google.maps.Size(40, 40),
+                        },
+                    });
+
+                    markers.push(marker);
+                    bounds.extend(position);
+                    map.fitBounds(bounds);
+                }
+            }
+        );
+    });
 }
+
 
 // **Clear all markers from map**
 function clearMarkers() {
@@ -179,39 +188,54 @@ function showRoute() {
     if (selectedItems.length < 2) return;
 
     let waypoints = [];
+    let service = new google.maps.places.PlacesService(map);
+    let promises = [];
+
     selectedItems.forEach((item, index) => {
-        let lat = parseFloat(item.getAttribute("data-lat"));
-        let lng = parseFloat(item.getAttribute("data-lng"));
-        if (!isNaN(lat) && !isNaN(lng) && index !== 0 && index !== selectedItems.length - 1) {
-            waypoints.push({
-                location: { lat, lng },
-                stopover: true,
-            });
-        }
+        let placeName = item.getAttribute("data-place");
+        if (!placeName) return;
+
+        let promise = new Promise((resolve) => {
+            service.findPlaceFromQuery(
+                { query: placeName, fields: ["geometry"] },
+                function(results, status) {
+                    if (status === google.maps.places.PlacesServiceStatus.OK && results[0]) {
+                        let location = results[0].geometry.location;
+                        resolve({ index, location });
+                    } else {
+                        resolve(null);
+                    }
+                }
+            );
+        });
+
+        promises.push(promise);
     });
 
-    let origin = {
-        lat: parseFloat(selectedItems[0].getAttribute("data-lat")),
-        lng: parseFloat(selectedItems[0].getAttribute("data-lng"))
-    };
-    
-    let destination = {
-        lat: parseFloat(selectedItems[selectedItems.length - 1].getAttribute("data-lat")),
-        lng: parseFloat(selectedItems[selectedItems.length - 1].getAttribute("data-lng"))
-    };
+    Promise.all(promises).then(locations => {
+        locations = locations.filter(loc => loc !== null).sort((a, b) => a.index - b.index);
+        if (locations.length < 2) return;
 
-    let request = {
-        origin,
-        destination,
-        waypoints,
-        travelMode: google.maps.TravelMode.DRIVING,
-    };
+        let origin = locations[0].location;
+        let destination = locations[locations.length - 1].location;
+        let waypoints = locations.slice(1, -1).map(loc => ({
+            location: loc.location,
+            stopover: true,
+        }));
 
-    directionsService.route(request, function (response, status) {
-        if (status === google.maps.DirectionsStatus.OK) {
-            directionsRenderer.setDirections(response);
-        } else {
-            alert("Directions request failed. Please check locations.");
-        }
+        let request = {
+            origin,
+            destination,
+            waypoints,
+            travelMode: google.maps.TravelMode.DRIVING,
+        };
+
+        directionsService.route(request, function(response, status) {
+            if (status === google.maps.DirectionsStatus.OK) {
+                directionsRenderer.setDirections(response);
+            } else {
+                alert("Directions request failed. Please check locations.");
+            }
+        });
     });
 }
