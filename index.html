@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valentine's Day Invitation</title>
     <link rel="stylesheet" href="styles.css">
-    <script async defer loading="async"  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdPAQnf7GgnjYvhCglti-Pj3w1tzPSrbY&libraries=places&callback=initMap" async defer></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdPAQnf7GgnjYvhCglti-Pj3w1tzPSrbY&libraries=places&callback=initMap" async defer></script>
 </head>
 <body>
     <!-- First Page: Valentine's Invitation -->
@@ -32,72 +32,81 @@
             <button class="invite-btn" id="accept-btn">I Accept! Let's Go! 🥂</button>
             <button class="invite-btn" id="reject-btn">Nah I'm busy 😭</button>
         </main>
+
+        <!-- Footer on First Page -->
+        <footer class="footer">
+            <p>Created with love by your third fav Korean 🥰 <br> Ft. JavaScript, HTML & CSS 😚</p>
+        </footer>
     </div> <!-- End of Invitation Page -->
 
     <!-- Second Page: Itinerary page once accepted -->
     <div id="itineraryPage" class="main-container" style="display: none;">
         <h1>Choose Your Valentine's Day Itinerary</h1>
 
-        <!-- Food & Dining Section -->
-        <div class="itinerary-category">
-            <h2 class="category-title">Food & Dining</h2>
-            <div class="itinerary-grid">
-                <label class="itinerary-item" data-place="London Eye, London">
-                    <input type="checkbox" name="activity" value="Romantic Dinner" hidden>
-                    <img src="images/Romantic Dinner.jpg" alt="Romantic Dinner" class="activity-img">
-                    <div class="tick">✔</div>
-                    <span>Romantic Dinner 🍽️</span>
-                </label>
-            </div>
-        </div>
+         <!-- Centered White Section Box -->
+        <div class="white-box">
+            <div class="content-wrapper">
+                <!-- Left Side: Itinerary Selection -->
+                <div class="itinerary-section">
+                    <div class="itinerary-category">
+                        <h2 class="category-title">Food & Dining</h2>
+                        <div class="itinerary-grid">
+                            <label class="itinerary-item" data-place="London Eye, London">
+                                <input type="checkbox" name="activity" value="Romantic Dinner" hidden>
+                                <img src="images/Romantic Dinner.jpg" alt="Romantic Dinner" class="activity-img">
+                                <div class="tick">✔</div>
+                                <span>Romantic Dinner 🍽️</span>
+                            </label>
+                        </div>
+                    </div>
 
-        <!-- Activities Section -->
-        <div class="itinerary-category">
-            <h2 class="category-title">Activities</h2>
-            <div class="itinerary-grid">
-                <label class="itinerary-item" data-place="London Eye, London">
-                    <input type="checkbox" name="activity" value="Beach Walk" hidden>
-                    <img src="images/Beach Walk.jpg" alt="Beach Walk" class="activity-img">
-                    <div class="tick">✔</div>
-                    <span>Beach Walk 🌊</span>
-                </label>
-            </div>
-        </div>
+                    <div class="itinerary-category">
+                        <h2 class="category-title">Activities</h2>
+                        <div class="itinerary-grid">
+                            <label class="itinerary-item" data-place="London Eye, London">
+                                <input type="checkbox" name="activity" value="Beach Walk" hidden>
+                                <img src="images/Beach Walk.jpg" alt="Beach Walk" class="activity-img">
+                                <div class="tick">✔</div>
+                                <span>Beach Walk 🌊</span>
+                            </label>
+                        </div>
+                    </div>
 
-        <!-- Quality Time Section -->
-        <div class="itinerary-category">
-            <h2 class="category-title">Quality Time</h2>
-            <div class="itinerary-grid">
-                <label class="itinerary-item" data-place="The Shard, London">
-                    <input type="checkbox" name="activity" value="Movie Night" hidden>
-                    <img src="images/Movie.jpg" alt="Cinema" class="activity-img">
-                    <div class="tick">✔</div>
-                    <span>Movie Night 🎬</span>
-                </label>
+                    <div class="itinerary-category">
+                        <h2 class="category-title">Quality Time</h2>
+                        <div class="itinerary-grid">
+                            <label class="itinerary-item" data-place="The Shard, London">
+                                <input type="checkbox" name="activity" value="Movie Night" hidden>
+                                <img src="images/Movie.jpg" alt="Cinema" class="activity-img">
+                                <div class="tick">✔</div>
+                                <span>Movie Night 🎬</span>
+                            </label>
 
-                <label class="itinerary-item" data-place="The Shard, London">
-                    <input type="checkbox" name="activity" value="Stargazing" hidden>
-                    <img src="images/Stargazing.jpg" alt="Stargazing" class="activity-img">
-                    <div class="tick">✔</div>
-                    <span>Stargazing ✨</span>
-                </label>
-            </div>
-        </div>
-    </div>
-
-            <!-- Right Side: Map Section -->
-            <div class="map-section">
-                <div class="map-container">
-                    <div id="map"></div>
+                            <label class="itinerary-item" data-place="The Shard, London">
+                                <input type="checkbox" name="activity" value="Stargazing" hidden>
+                                <img src="images/Stargazing.jpg" alt="Stargazing" class="activity-img">
+                                <div class="tick">✔</div>
+                                <span>Stargazing ✨</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
-                <button type="submit" class="submit-btn" onclick="submitSelection()">Confirm Selection</button>
-            </div>
-        </div>
 
-        <!-- Footer on Itinerary Page -->
-        <footer>
-            <p>Created with love by your third fav Korean 🥰 <br> Ft. JavaScript, HTML & CSS 😚</p>
-        </footer>
+                <!-- Right Side: Map Section -->
+                <div class="map-section">
+                    <div class="map-container">
+                        <div id="map"></div>
+                    </div>
+                    <button type="submit" class="submit-btn" onclick="submitSelection()">Confirm Selection</button>
+                </div>
+            </div>
+
+            <!-- Footer inside the white box -->
+            <footer class="footer">
+                <p>Created with love by your third fav Korean 🥰 <br> Ft. JavaScript, HTML & CSS 😚</p>
+            </footer>
+        </div> <!-- End of White Box -->
+
     </div> <!-- End of Itinerary Page -->
 
     <script src="script.js"></script>
