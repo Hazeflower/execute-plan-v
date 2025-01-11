@@ -9,8 +9,7 @@
 </head>
 <body>
     <!-- First Page: Valentine's Invitation -->
-    <div class="container">  <!-- One container for both pages -->
-    <div id="invitationPage">
+    <div id="invitationPage" class="container">
         <header>
             <h1>Valentine's Day Invitation</h1>
         </header>
@@ -36,7 +35,7 @@
     </div> <!-- End of Invitation Page -->
 
     <!-- Second Page: Itinerary page once accepted -->
-    <div id="itineraryPage" style="display: none;">
+    <div id="itineraryPage" class="main-container" style="display: none;">
         <h1>Choose Your Valentine's Day Itinerary</h1>
 
         <!-- Food & Dining Section -->
@@ -85,9 +84,12 @@
             </div>
         </div>
 
+        <button type="submit" class="submit-btn" onclick="submitSelection()">Confirm Selection</button>
+    </div> <!-- End of Itinerary Page -->
+
+        <div class="map-container">
         <div id="map"></div> <!-- Map Container -->
-            <button type="submit" class="submit-btn" onclick="submitSelection()">Confirm Selection</button>
-        </div> <!-- End of Itinerary Page -->
+    </div>   
 
     <footer>
         <p>Created with love by your third fav Korean 🥰 <br> Ft. JavaScript, HTML & CSS 😚</p>
