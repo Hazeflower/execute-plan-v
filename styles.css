@@ -120,8 +120,8 @@ footer {
 }
 
 .white-box {
-    width: 90%;
-    max-width: 1300px;
+    width: auto;  /* Allow it to grow based on content */
+    max-width: 90vw;  /* Prevent it from becoming too wide */
     background: white;
     padding: 30px;
     border-radius: 10px;
@@ -131,6 +131,7 @@ footer {
     align-items: center;
     justify-content: center; /* Centers content inside */
     margin: 50px auto; /* Centered */
+    overflow: hidden; /* Prevents unwanted scrollbars */
 }
 
 /* Page Title Inside White Box */
@@ -184,11 +185,11 @@ footer {
     display: flex;
     flex-wrap: nowrap; /* Prevents wrapping */
     overflow-x: auto;  /* Adds horizontal scrolling if too many items */
-    justify-content: center;
+    justify-content: flex-start; /* Aligns items to the left */
     gap: 15px;
     padding: 20px;
     width: 100%;
-    min-width: 450px; /* Prevents weird wrapping */
+    min-width: 100%; /* Ensures it fits inside `.white-box` */
 
 }
 
@@ -277,6 +278,7 @@ footer {
     justify-content: flex-start;
     min-width: 350px; /* Prevents map from getting squished */
     margin-top: 280px; /* Pushes it down */
+    position: relative; /* Keep it within `.white-box` */
 }
 
 /* Map Container */
