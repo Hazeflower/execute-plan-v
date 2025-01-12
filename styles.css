@@ -116,6 +116,7 @@ footer {
     align-items: center;
     width: 100%;
     min-height: 100vh;
+    flex-direction: row; /* Change from column to row */
 }
 
 .white-box {
@@ -128,6 +129,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; /* Centers content inside */
     margin: 50px auto; /* Centered */
 }
 
