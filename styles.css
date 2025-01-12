@@ -144,9 +144,9 @@ footer {
 /* Layout for Itinerary Page */
 .content-wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
-    gap: 30px;
+    gap: 50px;
 }
 
 /* Left Side: Activities */
@@ -273,7 +273,7 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    min-width: 450px; /* Prevents map from getting squished */
+    min-width: 350px; /* Prevents map from getting squished */
     margin-top: 280px; /* Pushes it down */
 }
 
