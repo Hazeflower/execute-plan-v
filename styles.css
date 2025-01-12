@@ -188,9 +188,7 @@ footer {
     justify-content: flex-start; /* Aligns items to the left */
     gap: 15px;
     padding: 20px;
-    width: 100%;
-    min-width: 100%; /* Ensures it fits inside `.white-box` */
-
+    max-width: 100%; /* Ensures it fits inside `.white-box` */
 }
 
 /* Itinerary Item Styling */
