@@ -181,13 +181,13 @@ footer {
 
 /* Itinerary Image Selection Grid */
 .itinerary-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Ensures 3 items per row */
-    gap: 15px;
+    display: flex;
+    flex-wrap: nowrap; /* Prevents wrapping */
+    overflow-x: auto;  /* Adds horizontal scrolling if too many items */
     justify-content: center;
+    gap: 15px;
     padding: 20px;
     width: 100%;
-    min-width: 450px; /* Prevents weird wrapping */
 }
 
 /* Itinerary Item Styling */
