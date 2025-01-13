@@ -160,6 +160,14 @@ function updateMap() {
     let bounds = new google.maps.LatLngBounds();
     let service = new google.maps.places.PlacesService(map);
 
+    if (selectedItems.length === 0) {
+        // No selected activities, reset to default London view
+        console.log("No activities selected. Resetting to default London view.");
+        map.setCenter({ lat: 51.5074, lng: -0.1278 }); // London coordinates
+        map.setZoom(12);
+        return;
+    }
+    
     selectedItems.forEach(item => {
         let placeName = item.getAttribute("data-place");
         if (!placeName) return;
