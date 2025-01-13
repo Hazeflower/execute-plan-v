@@ -294,6 +294,13 @@ footer {
     border: 2px solid #ff4d79;
 }
 
+.place-details-container {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
 /* Submit Button */
 .submit-btn {
     background: linear-gradient(to right, #ff4d4d, #d1006d);
