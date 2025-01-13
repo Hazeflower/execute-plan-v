@@ -3,6 +3,7 @@ let placesService;
 let markers = [];
 let directionsService;
 let directionsRenderer;
+let infoWindow; // New info window for details
 
 document.addEventListener("DOMContentLoaded", function() {
     const acceptBtn = document.getElementById("accept-btn");
@@ -98,6 +99,8 @@ function initMap() {
     directionsService = new google.maps.DirectionsService();
     directionsRenderer = new google.maps.DirectionsRenderer();
     directionsRenderer.setMap(map);
+
+    infoWindow = new google.maps.InfoWindow();
 }
 
 // Ensure the map reloads when switching to the itinerary page
@@ -173,10 +176,11 @@ function updateMap() {
         if (!placeName) return;
 
         service.findPlaceFromQuery(
-            { query: placeName, fields: ["name", "geometry"] },
-            function(results, status) {
+            { query: placeName, fields: ["name", "geometry", "place_id"] },
+            function (results, status) {
                 if (status === google.maps.places.PlacesServiceStatus.OK && results[0]) {
                     let position = results[0].geometry.location;
+
                     let marker = new google.maps.Marker({
                         position,
                         map,
@@ -189,13 +193,51 @@ function updateMap() {
 
                     markers.push(marker);
                     bounds.extend(position);
+                    map.setCenter(position);
+                    map.setZoom(8); // Adjusted zoom level for a 500m radius view
+
+                    // Get place details
+                    getPlaceDetails(results[0].place_id);
+
+                    // Clicking the marker shows info window
+                    marker.addListener("click", function () {
+                        infoWindow.setContent(`<b>${results[0].name}</b>`);
+                        infoWindow.open(map, marker);
+                    });
+
                     map.fitBounds(bounds);
+
                 }
             }
         );
     });
 }
 
+// **Function to Fetch Place Details**
+function getPlaceDetails(placeId) {
+    placesService.getDetails(
+        { placeId, fields: ["name", "rating", "user_ratings_total", "formatted_address"] },
+        function (place, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                let detailsDiv = document.getElementById("place-details");
+                if (!detailsDiv) {
+                    console.error("Place details div not found!");
+                    return;
+                }
+
+                detailsDiv.innerHTML = `
+                    <div class="details-container">
+                        <h3>${place.name}</h3>
+                        <p><strong>Rating:</strong> ${place.rating} ⭐ (${place.user_ratings_total} reviews)</p>
+                        <p><strong>Address:</strong> ${place.formatted_address}</p>
+                    </div>
+                `;
+            } else {
+                console.error("Failed to retrieve place details:", status);
+            }
+        }
+    );
+}
 
 // **Clear all markers from map**
 function clearMarkers() {
