@@ -101,15 +101,6 @@ function initMap() {
     directionsRenderer.setMap(map);
 
     infoWindow = new google.maps.InfoWindow();
-}
-
-// Ensure the map reloads when switching to the itinerary page
-document.getElementById("accept-btn").addEventListener("click", function() {
-    setTimeout(() => {
-        initMap();
-    }, 500); // Delay ensures div is visible before map loads
-});
-
 // Initialize PlacesService AFTER map is ready
     placesService = new google.maps.places.PlacesService(map);
 
@@ -186,15 +177,16 @@ function updateMap() {
                         map,
                         title: results[0].name,
                         icon: {
-                            url: "https://github.com/Hazeflower/execute-plan-v/blob/main/images/heart-marker",
+                            url: "https://raw.githubusercontent.com/Hazeflower/execute-plan-v/main/images/heart-marker.png",
                             scaledSize: new google.maps.Size(40, 40),
                         },
                     });
 
                     markers.push(marker);
                     bounds.extend(position);
+                    map.setZoom(15); // Adjusted zoom for ~500m view
                     map.setCenter(position);
-                    map.setZoom(8); // Adjusted zoom level for a 500m radius view
+                    map.fitBounds(bounds);
 
                     // Get place details
                     getPlaceDetails(results[0].place_id);
@@ -204,9 +196,9 @@ function updateMap() {
                         infoWindow.setContent(`<b>${results[0].name}</b>`);
                         infoWindow.open(map, marker);
                     });
-
-                    map.fitBounds(bounds);
-
+                    } else {
+                    console.error("Failed to retrieve place:", status);
+                    }
                 }
             }
         );
@@ -225,6 +217,7 @@ function getPlaceDetails(placeId) {
                     return;
                 }
 
+                detailsDiv.style.display = "block"; // Show details panel
                 detailsDiv.innerHTML = `
                     <div class="details-container">
                         <h3>${place.name}</h3>
