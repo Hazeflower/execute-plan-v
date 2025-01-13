@@ -132,6 +132,7 @@ footer {
     justify-content: center; /* Centers content inside */
     margin: 50px auto; /* Centered */
     overflow: hidden; /* Prevents unwanted scrollbars */
+    padding-left: 100px; /* Adds some left spacing */
 }
 
 /* Page Title Inside White Box */
