@@ -292,19 +292,20 @@ footer {
     height: 400px;
     border-radius: 15px;
     border: 2px solid #ff4d79;
-    position: relative;
+    position: relative; /* ⬅️ Needed for correct placement */
 }
 
 /* Fix Detail Panel Placement */
 #place-details {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 20px;
+    right: 20px;
     width: 250px;
     background: white;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 10; /* Ensures it appears above the map */
     display: none; /* ✅ Initially hidden */
 }
 
