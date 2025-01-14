@@ -201,8 +201,8 @@ function getPlaceDetails(placeId) {
                     return;
                 }
 
-                if (status === google.maps.places.PlacesServiceStatus.OK) {
-                detailsDiv.style.display = "block"; // ✅ Show panel when a place is selected
+                // ✅ Show panel when a place is selected
+                detailsDiv.style.display = "block"; 
                 detailsDiv.innerHTML = `
                     <div class="details-container">
                         <h3>${place.name}</h3>
