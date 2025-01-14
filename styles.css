@@ -307,7 +307,7 @@ footer {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     z-index: 10; /* Ensures it appears above the map */
     display: none; /* ✅ Initially hidden */
-    margin-top: -200px; /* Pushes it up */
+    margin-bottom: 200px; /* Pushes it up */
 }
 
 /* Remove any floating white box */
