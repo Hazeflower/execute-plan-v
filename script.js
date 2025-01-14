@@ -103,6 +103,7 @@ function initMap() {
     infoWindow = new google.maps.InfoWindow();
 // Initialize PlacesService AFTER map is ready
     placesService = new google.maps.places.PlacesService(map);
+}
 
 // Toggle selection function
 function toggleSelection(item) {
@@ -127,7 +128,12 @@ function toggleSelection(item) {
     // Debugging log
     console.log(`Clicked: ${item.innerText}, Selected: ${checkbox.checked}`);
 
-    updateMap();
+    let placeId = item.getAttribute("data-place-id"); // Get place ID from the item
+    if (placeId) {
+        updateMap(placeId); // ✅ Pass the placeId to updateMap
+    } else {
+        console.error("No place ID found for selected item.");
+    }
 }
 
 // **Update Map dynamically using Place Names**
