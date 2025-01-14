@@ -170,9 +170,13 @@ function updateMap() {
                         },
                     });
 
+                    // Get the current zoom level and zoom out by 7 levels
+                    const currentZoom = map.getZoom();
+                    const newZoom = Math.max(currentZoom - 7, 0); // Prevent zoom level from being negative
+
                     markers.push(marker);
                     bounds.extend(position);
-                    map.setZoom(15);
+                    map.setZoom(newZoom);
                     map.setCenter(position);
                     map.fitBounds(bounds);
 
