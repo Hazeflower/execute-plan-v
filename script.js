@@ -91,18 +91,19 @@ function initMap() {
         return;
     }
     
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 51.5074, lng: -0.1278 }, // London as the base map
-        zoom: 12,
-    });
+    setTimeout(() => {
+        map = new google.maps.Map(mapElement, {
+            center: { lat: 51.5074, lng: -0.1278 }, // Default to London
+            zoom: 12,
+        });
                               
     directionsService = new google.maps.DirectionsService();
     directionsRenderer = new google.maps.DirectionsRenderer();
     directionsRenderer.setMap(map);
 
-    infoWindow = new google.maps.InfoWindow();
-// Initialize PlacesService AFTER map is ready
     placesService = new google.maps.places.PlacesService(map);
+        infoWindow = new google.maps.InfoWindow();
+    }, 500); // Small delay to allow elements to render
 }
 
 // Toggle selection function
@@ -128,11 +129,11 @@ function toggleSelection(item) {
     // Debugging log
     console.log(`Clicked: ${item.innerText}, Selected: ${checkbox.checked}`);
 
-    let placeId = item.getAttribute("data-place-id"); // Get place ID from the item
-    if (placeId) {
-        updateMap(placeId); // ✅ Pass the placeId to updateMap
+    let placeName = item.getAttribute("data-place"); // Get place name instead of placeId
+    if (placeName) {
+        updateMap(placeName); // ✅ Ensure correct place is passed
     } else {
-        console.error("No place ID found for selected item.");
+        console.error("No place name found for selected item.");
     }
 }
 
@@ -151,48 +152,43 @@ function updateMap() {
         return;
     }
     
-    selectedItems.forEach(item => {
-        let placeName = item.getAttribute("data-place");
-        if (!placeName) return;
+    if (!placeName) return;
 
-        service.findPlaceFromQuery(
-            { query: placeName, fields: ["name", "geometry", "place_id"] },
-            function (results, status) {
-                if (status === google.maps.places.PlacesServiceStatus.OK && results[0]) {
-                    let position = results[0].geometry.location;
+    placesService.findPlaceFromQuery(
+        { query: placeName, fields: ["name", "geometry", "place_id"] },
+        function (results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK && results[0]) {
+                let position = results[0].geometry.location;
 
-                    let marker = new google.maps.Marker({
-                        position,
-                        map,
-                        title: results[0].name,
-                        icon: {
-                            url: "https://raw.githubusercontent.com/Hazeflower/execute-plan-v/main/images/heart-marker.png",
-                            scaledSize: new google.maps.Size(40, 40),
-                        },
-                    });
+                let marker = new google.maps.Marker({
+                    position,
+                    map,
+                    title: results[0].name,
+                    icon: {
+                        url: "https://raw.githubusercontent.com/Hazeflower/execute-plan-v/main/images/heart-marker.png",
+                        scaledSize: new google.maps.Size(40, 40),
+                    },
+                });
 
-                    markers.push(marker);
-                    bounds.extend(position);
-                    map.setZoom(15); // Adjusted zoom for ~500m view
-                    map.setCenter(position);
-                    map.fitBounds(bounds);
+                markers.push(marker);
+                bounds.extend(position);
+                map.setZoom(15);
+                map.setCenter(position);
+                map.fitBounds(bounds);
 
-                    // Get place details
-                    getPlaceDetails(results[0].place_id);
+                getPlaceDetails(results[0].place_id);
 
-                    // Clicking the marker shows info window
-                    marker.addListener("click", function () {
-                        infoWindow.setContent(`<b>${results[0].name}</b>`);
-                        infoWindow.open(map, marker);
-                    });
-                } else {
-                    console.error("Failed to retrieve place:", status);
-                }
+                // Clicking the marker shows info window
+                marker.addListener("click", function () {
+                    infoWindow.setContent(`<b>${results[0].name}</b>`);
+                    infoWindow.open(map, marker);
+                });
+            } else {
+                console.error("Failed to retrieve place:", status);
             }
-        );
-    });
+        }
+    );
 }
-
 // **Function to Fetch Place Details**
 function getPlaceDetails(placeId) {
     placesService.getDetails(
@@ -205,7 +201,8 @@ function getPlaceDetails(placeId) {
                     return;
                 }
 
-                detailsDiv.style.display = "block"; // Show details panel
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                detailsDiv.style.display = "block"; // ✅ Show panel when a place is selected
                 detailsDiv.innerHTML = `
                     <div class="details-container">
                         <h3>${place.name}</h3>
@@ -219,6 +216,21 @@ function getPlaceDetails(placeId) {
         }
     );
 }
+
+// Ensure panel disappears when nothing is selected
+function hideDetailsPanel() {
+    let selectedItems = document.querySelectorAll(".itinerary-item.selected");
+    let detailsDiv = document.getElementById("place-details");
+
+    if (selectedItems.length === 0 && detailsDiv) {
+        detailsDiv.style.display = "none"; // ✅ Hide panel when no activities are selected
+    }
+}
+
+// Call hideDetailsPanel whenever an activity is toggled
+document.addEventListener("click", function () {
+    hideDetailsPanel();
+});
 
 // **Clear all markers from map**
 function clearMarkers() {
