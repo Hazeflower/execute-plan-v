@@ -292,13 +292,30 @@ footer {
     height: 400px;
     border-radius: 15px;
     border: 2px solid #ff4d79;
+    position: relative;
 }
 
-.place-details-container {
-    background: #fff;
-    padding: 15px;
-    border-radius: 8px;
+/* Fix Detail Panel Placement */
+#place-details {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 250px;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: none; /* ✅ Initially hidden */
+}
+
+/* Remove any floating white box */
+.place-details-container {
+    display: none; /* ✅ Ensure it's hidden initially */
+}
+
+/* Style the details box properly */
+.details-container {
+    font-size: 14px;
 }
 
 /* Submit Button */
