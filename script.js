@@ -92,7 +92,7 @@ function initMap() {
     }
     
     setTimeout(() => {
-        map = new google.maps.Map(mapElement, {
+        map = new google.maps.Map(document.getElementById("map"), {
             center: { lat: 51.5074, lng: -0.1278 }, // Default to London
             zoom: 12,
         });
@@ -145,49 +145,49 @@ function updateMap() {
     let service = new google.maps.places.PlacesService(map);
 
     if (selectedItems.length === 0) {
-        // No selected activities, reset to default London view
         console.log("No activities selected. Resetting to default London view.");
-        map.setCenter({ lat: 51.5074, lng: -0.1278 }); // London coordinates
+        map.setCenter({ lat: 51.5074, lng: -0.1278 });
         map.setZoom(12);
         return;
     }
-    
-    if (!placeName) return;
 
-    placesService.findPlaceFromQuery(
-        { query: placeName, fields: ["name", "geometry", "place_id"] },
-        function (results, status) {
-            if (status === google.maps.places.PlacesServiceStatus.OK && results[0]) {
-                let position = results[0].geometry.location;
+    selectedItems.forEach(item => {
+        let placeName = item.getAttribute("data-place"); // ✅ Correctly retrieve placeName
+        if (!placeName) return;
 
-                let marker = new google.maps.Marker({
-                    position,
-                    map,
-                    title: results[0].name,
-                    icon: {
-                        url: "https://raw.githubusercontent.com/Hazeflower/execute-plan-v/main/images/heart-marker.png",
-                        scaledSize: new google.maps.Size(40, 40),
-                    },
-                });
+        placesService.findPlaceFromQuery(
+            { query: placeName, fields: ["name", "geometry", "place_id"] },
+            function (results, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK && results[0]) {
+                    let position = results[0].geometry.location;
+                    let marker = new google.maps.Marker({
+                        position,
+                        map,
+                        title: results[0].name,
+                        icon: {
+                            url: "https://raw.githubusercontent.com/Hazeflower/execute-plan-v/main/images/heart-marker.png",
+                            scaledSize: new google.maps.Size(40, 40),
+                        },
+                    });
 
-                markers.push(marker);
-                bounds.extend(position);
-                map.setZoom(15);
-                map.setCenter(position);
-                map.fitBounds(bounds);
+                    markers.push(marker);
+                    bounds.extend(position);
+                    map.setZoom(15);
+                    map.setCenter(position);
+                    map.fitBounds(bounds);
 
-                getPlaceDetails(results[0].place_id);
+                    getPlaceDetails(results[0].place_id);
 
-                // Clicking the marker shows info window
-                marker.addListener("click", function () {
-                    infoWindow.setContent(`<b>${results[0].name}</b>`);
-                    infoWindow.open(map, marker);
-                });
-            } else {
-                console.error("Failed to retrieve place:", status);
+                    marker.addListener("click", function () {
+                        infoWindow.setContent(`<b>${results[0].name}</b>`);
+                        infoWindow.open(map, marker);
+                    });
+                } else {
+                    console.error("Failed to retrieve place:", status);
+                }
             }
-        }
-    );
+        );
+    });
 }
 // **Function to Fetch Place Details**
 function getPlaceDetails(placeId) {
