@@ -179,9 +179,8 @@ function updateMap() {
                         infoWindow.setContent(`<b>${results[0].name}</b>`);
                         infoWindow.open(map, marker);
                     });
-                    } else {
+                } else {
                     console.error("Failed to retrieve place:", status);
-                    }
                 }
             }
         );
