@@ -192,7 +192,7 @@ function updateMap() {
 // **Function to Fetch Place Details**
 function getPlaceDetails(placeId) {
     placesService.getDetails(
-        { placeId, fields: ["name", "rating", "user_ratings_total", "formatted_address"] },
+        { placeId, fields: ["name", "rating", "user_ratings_total", "formatted_address","website"] },
         function (place, status) {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
                 let detailsDiv = document.getElementById("place-details");
@@ -208,6 +208,7 @@ function getPlaceDetails(placeId) {
                         <h3>${place.name}</h3>
                         <p><strong>Rating:</strong> ${place.rating} ⭐ (${place.user_ratings_total} reviews)</p>
                         <p><strong>Address:</strong> ${place.formatted_address}</p>
+                        ${place.website ? `<p><strong>Website:</strong> <a href="${place.website}" target="_blank">${place.website}</a></p>` : ""}
                     </div>
                 `;
             } else {
