@@ -257,10 +257,11 @@ function submitSelection(event) {
 
     if (selectedActivities.length > 0) {
         alert("You have selected: " + selectedActivities.join(", "));
-        showRoute();
     } else {
         alert("Please select at least one activity!");
     }
+
+    
 
     document.getElementById("itineraryPage").style.display = "none";
     document.getElementById("confirmationPage").classList.remove("hidden");
