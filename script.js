@@ -208,7 +208,7 @@ function getPlaceDetails(placeId) {
                         <h3>${place.name}</h3>
                         <p><strong>Rating:</strong> ${place.rating} ⭐ (${place.user_ratings_total} reviews)</p>
                         <p><strong>Address:</strong> ${place.formatted_address}</p>
-                        ${place.website ? `<p><strong>Website:</strong> <a href="${place.website}" target="_blank">${place.website}</a></p>` : ""}
+                        ${place.website ? `<p><strong>Website:</strong> <a href="${place.website}" target="_blank">Click for more details</a></p>` : ""}
                     </div>
                 `;
             } else {
