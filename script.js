@@ -261,8 +261,6 @@ function submitSelection(event) {
         alert("Please select at least one activity!");
     }
 
-    
-
-    document.getElementById("itineraryPage").style.display = "none";
-    document.getElementById("confirmationPage").classList.remove("hidden");
+    itineraryPage.style.display = "none";
+    confirmationPage.style.display = "block";
 }
