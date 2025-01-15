@@ -261,62 +261,7 @@ function submitSelection(event) {
     } else {
         alert("Please select at least one activity!");
     }
-}
 
-// **Show route between selected locations (Future Improvement)**
-function showRoute() {
-    let selectedItems = document.querySelectorAll(".itinerary-item.selected");
-    if (selectedItems.length < 2) return;
-
-    let waypoints = [];
-    let service = new google.maps.places.PlacesService(map);
-    let promises = [];
-
-    selectedItems.forEach((item, index) => {
-        let placeName = item.getAttribute("data-place");
-        if (!placeName) return;
-
-        let promise = new Promise((resolve) => {
-            service.findPlaceFromQuery(
-                { query: placeName, fields: ["geometry"] },
-                function(results, status) {
-                    if (status === google.maps.places.PlacesServiceStatus.OK && results[0]) {
-                        let location = results[0].geometry.location;
-                        resolve({ index, location });
-                    } else {
-                        resolve(null);
-                    }
-                }
-            );
-        });
-
-        promises.push(promise);
-    });
-
-    Promise.all(promises).then(locations => {
-        locations = locations.filter(loc => loc !== null).sort((a, b) => a.index - b.index);
-        if (locations.length < 2) return;
-
-        let origin = locations[0].location;
-        let destination = locations[locations.length - 1].location;
-        let waypoints = locations.slice(1, -1).map(loc => ({
-            location: loc.location,
-            stopover: true,
-        }));
-
-        let request = {
-            origin,
-            destination,
-            waypoints,
-            travelMode: google.maps.TravelMode.DRIVING,
-        };
-
-        directionsService.route(request, function(response, status) {
-            if (status === google.maps.DirectionsStatus.OK) {
-                directionsRenderer.setDirections(response);
-            } else {
-                alert("Directions request failed. Please check locations.");
-            }
-        });
-    });
+    document.getElementById("itineraryPage").style.display = "none";
+    document.getElementById("confirmationPage").classList.remove("hidden");
 }
