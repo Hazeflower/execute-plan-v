@@ -164,7 +164,7 @@ function updateMap() {
                         title: results[0].name,
                         icon: {
                             url: "https://raw.githubusercontent.com/Hazeflower/execute-plan-v/main/images/Heart%20marker.png",
-                            scaledSize: new google.maps.Size(40, 40),
+                            scaledSize: new google.maps.Size(30, 30),
                         },
                     });
 
