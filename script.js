@@ -91,8 +91,7 @@ function initMap() {
         return;
     }
     
-    setTimeout(() => {
-        map = new google.maps.Map(document.getElementById("map"), {
+     map = new google.maps.Map(document.getElementById("map"), {
             center: { lat: 51.5074, lng: -0.1278 }, // Default to London
             zoom: 12,
         });
@@ -100,10 +99,8 @@ function initMap() {
     directionsService = new google.maps.DirectionsService();
     directionsRenderer = new google.maps.DirectionsRenderer();
     directionsRenderer.setMap(map);
-
     placesService = new google.maps.places.PlacesService(map);
-        infoWindow = new google.maps.InfoWindow();
-    }, 500); // Small delay to allow elements to render
+    infoWindow = new google.maps.InfoWindow();
 }
 
 // Toggle selection function
@@ -142,7 +139,6 @@ function updateMap() {
     clearMarkers();
     let selectedItems = document.querySelectorAll(".itinerary-item.selected");
     let bounds = new google.maps.LatLngBounds();
-    let service = new google.maps.places.PlacesService(map);
 
     if (selectedItems.length === 0) {
         console.log("No activities selected. Resetting to default London view.");
@@ -160,6 +156,8 @@ function updateMap() {
             function (results, status) {
                 if (status === google.maps.places.PlacesServiceStatus.OK && results[0]) {
                     let position = results[0].geometry.location;
+                    let placeId = results[0].place_id;
+                    
                     let marker = new google.maps.Marker({
                         position,
                         map,
@@ -172,11 +170,17 @@ function updateMap() {
 
                     markers.push(marker);
                     bounds.extend(position);
-                    map.setZoom(-7);
-                    map.setCenter(position);
-                    map.fitBounds(bounds);
 
-                    getPlaceDetails(results[0].place_id);
+                    // If there's only one selected place, use panTo + setZoom
+                    if (selectedItems.length === 1) {
+                        map.panTo(position);
+                        map.setZoom(14);  // Zoom in when only one place is selected
+                    } else {
+                        map.fitBounds(bounds); // FitBounds for multiple places
+                    }
+
+                    // ✅ Fetch & update place details
+                    getPlaceDetails(placeId);
 
                     marker.addListener("click", function () {
                         infoWindow.setContent(`<b>${results[0].name}</b>`);
