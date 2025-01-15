@@ -370,3 +370,30 @@ footer {
         grid-template-columns: repeat(2, 1fr); /* 2 items per row for small screens */
     }
 }
+
+/* Hide confirmation page initially */
+.hidden {
+    display: none;
+}
+
+/* Confirmation Page Styling */
+#confirmationPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    background-color: #ffcccb;
+}
+
+.confirmation-container {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.email-icon {
+    width: 80px;
+    margin-bottom: 20px;
+}
