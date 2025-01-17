@@ -19,6 +19,11 @@ document.addEventListener("DOMContentLoaded", function() {
             alert("Yay! Can't wait for our special date! 💖");
             invitationPage.style.display = "none";
             itineraryPage.style.display = "block";
+
+            // ✅ Only initialise the map when the itinerary page is shown
+            if (mapElement && !map) {
+                initMap();
+            }
         });
     }
 
@@ -266,15 +271,24 @@ function submitSelection(event) {
  // ✅ Ensure confirmationPage exists before using it
     const itineraryPage = document.getElementById("itineraryPage");
     const confirmationPage = document.getElementById("confirmationPage");
+    const confirmationMessage = document.getElementById("confirmationMessage");
 
     if (!confirmationPage) {
         console.error("⚠️ Confirmation page element not found! The page transition will be skipped.");
-        // Instead of return, just log the error and continue
-    } else {
-        // ✅ Hide itinerary page & show confirmation page smoothly
-        itineraryPage.style.display = "none";
-        confirmationPage.style.display = "flex";
+        return;
     }
+
+    // ✅ Update confirmation page content dynamically
+    confirmationMessage.innerHTML = `You have selected: <strong>${selectedActivities.join(", ")}</strong>. Your selection has been sent to your planner! ❤️📩`;
+
+    // ✅ Hide itinerary page & show confirmation page smoothly
+    itineraryPage.style.display = "none";
+    confirmationPage.style.display = "block";
+
+    // ✅ Smooth transition effect
+    setTimeout(() => {
+        confirmationPage.style.opacity = "1";
+    }, 100); // Small delay to trigger the transition
 
     // ✅ Call email function after transition
     sendEmail(selectedActivities);
