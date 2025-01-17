@@ -261,10 +261,6 @@ function submitSelection(event) {
         alert("Please select at least one activity!");
     }
 
-    itineraryPage.style.display = "none";
-    confirmationPage.style.display = "block";
-}
-
 // ✅ Ensure confirmationPage is properly selected
     const itineraryPage = document.getElementById("itineraryPage");
     const confirmationPage = document.getElementById("confirmationPage");
