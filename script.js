@@ -263,18 +263,18 @@ function submitSelection(event) {
 
     alert("You have selected: " + selectedActivities.join(", "));
     
-// ✅ Ensure confirmationPage is properly selected
+ // ✅ Ensure confirmationPage exists before using it
     const itineraryPage = document.getElementById("itineraryPage");
     const confirmationPage = document.getElementById("confirmationPage");
 
     if (!confirmationPage) {
-        console.error("Confirmation page element not found!");
-        return;
+        console.error("⚠️ Confirmation page element not found! The page transition will be skipped.");
+        // Instead of return, just log the error and continue
+    } else {
+        // ✅ Hide itinerary page & show confirmation page smoothly
+        itineraryPage.style.display = "none";
+        confirmationPage.style.display = "flex";
     }
-
-    // Hide itinerary page & show confirmation page
-    itineraryPage.style.display = "none";
-    confirmationPage.style.display = "flex"; // ✅ Use 'flex' to match CSS styling
 
     // ✅ Call email function after transition
     sendEmail(selectedActivities);
