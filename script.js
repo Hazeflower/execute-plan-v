@@ -255,12 +255,14 @@ function submitSelection(event) {
         }
     });
 
-    if (selectedActivities.length > 0) {
-        alert("You have selected: " + selectedActivities.join(", "));
-    } else {
+    // ✅ Ensure user selects at least one activity
+    if (selectedActivities.length === 0) {
         alert("Please select at least one activity!");
+        return; // ⛔ Stop execution
     }
 
+    alert("You have selected: " + selectedActivities.join(", "));
+    
 // ✅ Ensure confirmationPage is properly selected
     const itineraryPage = document.getElementById("itineraryPage");
     const confirmationPage = document.getElementById("confirmationPage");
