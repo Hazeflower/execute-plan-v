@@ -264,3 +264,20 @@ function submitSelection(event) {
     itineraryPage.style.display = "none";
     confirmationPage.style.display = "block";
 }
+
+// ✅ Ensure confirmationPage is properly selected
+    const itineraryPage = document.getElementById("itineraryPage");
+    const confirmationPage = document.getElementById("confirmationPage");
+
+    if (!confirmationPage) {
+        console.error("Confirmation page element not found!");
+        return;
+    }
+
+    // Hide itinerary page & show confirmation page
+    itineraryPage.style.display = "none";
+    confirmationPage.style.display = "flex"; // ✅ Use 'flex' to match CSS styling
+
+    // ✅ Call email function after transition
+    sendEmail(selectedActivities);
+}
