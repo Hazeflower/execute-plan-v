@@ -278,8 +278,7 @@ function submitSelection(event) {
         console.error("⚠️ Confirmation page element not found! The page transition will be skipped.");
         return;
     }
-
-    const confirmationMessage = document.getElementById("confirmationMessage");
+    
     if (!confirmationMessage) {
     console.error("⚠️ confirmationMessage element not found!");
     return;
