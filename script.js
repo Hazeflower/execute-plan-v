@@ -251,7 +251,7 @@ function clearMarkers() {
 
 // Submit selection function
 function submitSelection(event) {
-    event.preventDefault(); // Prevent any accidental multiple triggers
+    if (event) event.preventDefault(); // ✅ Prevents the error if event is undefined
     
     let selectedActivities = [];
     document.querySelectorAll(".itinerary-item.selected").forEach(item => {
@@ -279,6 +279,12 @@ function submitSelection(event) {
         return;
     }
 
+    const confirmationMessage = document.getElementById("confirmationMessage");
+    if (!confirmationMessage) {
+    console.error("⚠️ confirmationMessage element not found!");
+    return;
+    }
+    
     // ✅ Update confirmation page content dynamically
     confirmationMessage.innerHTML = `You have selected: <strong>${selectedActivities.join(", ")}</strong>. Your selection has been sent to your planner! ❤️📩`;
 
