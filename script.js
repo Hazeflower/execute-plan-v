@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const rejectBtn = document.getElementById("reject-btn");
     const itineraryPage = document.getElementById("itineraryPage");
     const invitationPage = document.getElementById("invitationPage");
+    const mapElement = document.getElementById("map");
 
     let rejectCount = 0; // Counter for tracking rejection clicks
 
