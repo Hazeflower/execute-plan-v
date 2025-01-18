@@ -295,7 +295,4 @@ function submitSelection(event) {
     setTimeout(() => {
         confirmationPage.style.opacity = "1";
     }, 100); // Small delay to trigger the transition
-
-    // ✅ Call email function after transition
-    sendEmail(selectedActivities);
 }
