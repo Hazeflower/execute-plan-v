@@ -86,9 +86,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const submitButton = document.querySelector(".submit-btn");
     if (submitButton) {
         submitButton.addEventListener("click", function(event) {
-        event.preventDefault(); // ✅ Prevent default form submission
-        submitSelection(event); // Call the function
-    });
+            event.preventDefault(); // ✅ Prevent default form submission
+            submitSelection(event); // Call the function
+        });
+    }
 });
 
 // **Initialize Google Map**
