@@ -84,8 +84,9 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Add event listener for submit button
     const submitButton = document.querySelector(".submit-btn");
-    if (submitButton) {
-        submitButton.addEventListener("click", submitSelection, { once: true }); // Attach listener only once
+    if (submitButton) { // Ensure button exists to avoid errors
+        submitButton.removeEventListener("click", submitSelection); // Remove any existing listener
+        submitButton.addEventListener("click", submitSelection); // Add the listener
     }
 });
 
