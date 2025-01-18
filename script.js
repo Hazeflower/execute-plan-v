@@ -67,27 +67,29 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Event delegation for itinerary selection (more efficient & fixes selection issue)
     document.addEventListener("click", function (event) {
-    let item = event.target.closest(".itinerary-item");
-    if (!item) return; // Ensure only clicks inside the item are processed
-
-    // Check if the click happened inside an interactive element
-    if (event.target.tagName === "INPUT") return; // Avoid issues with checkboxes
-
-    // Manually trigger the checkbox selection
-    let checkbox = item.querySelector("input[type='checkbox']");
-    if (checkbox) {
-        checkbox.checked = !checkbox.checked;
-    }
-
-    toggleSelection(item);
-});
+        let item = event.target.closest(".itinerary-item");
+        if (!item) return; // Ensure only clicks inside the item are processed
+    
+        // Check if the click happened inside an interactive element
+        if (event.target.tagName === "INPUT") return; // Avoid issues with checkboxes
+    
+        // Manually trigger the checkbox selection
+        let checkbox = item.querySelector("input[type='checkbox']");
+        if (checkbox) {
+            checkbox.checked = !checkbox.checked;
+        }
+    
+        toggleSelection(item);
+    });
     
     // Add event listener for submit button
     const submitButton = document.querySelector(".submit-btn");
     if (submitButton) { // Ensure button exists to avoid errors
     submitButton.removeEventListener("click", submitSelection); // Remove any existing listener
-    submitButton.addEventListener("click", submitSelection); // Add the listener
-    }
+    submitButton.addEventListener("click", function (event) {
+        submitSelection(event); // Pass the event explicitly
+    });
+}
 });
 
 // **Initialize Google Map**
@@ -253,7 +255,9 @@ function clearMarkers() {
 
 // Submit selection function
 function submitSelection(event) {
-    event.preventDefault(); // ✅ Prevents the error if event is undefined
+    if (event && event.preventDefault) {
+        event.preventDefault(); // Prevent form submission
+    }
     
     let selectedActivities = [];
     document.querySelectorAll(".itinerary-item.selected").forEach(item => {
@@ -276,6 +280,12 @@ function submitSelection(event) {
     const confirmationPage = document.getElementById("confirmationPage");
     const confirmationMessage = document.getElementById("confirmationMessage");
 
+    // Ensure the required elements exist
+    if (!itineraryPage || !confirmationPage || !confirmationMessage) {
+        console.error("⚠️ Missing one or more required elements!");
+        return;
+    }
+
     if (!confirmationPage) {
         console.error("⚠️ Confirmation page element not found! The page transition will be skipped.");
         return;
@@ -288,16 +298,14 @@ function submitSelection(event) {
 
     // ✅ Hide itinerary page & show confirmation page smoothly
     itineraryPage.style.display = "none";
-    confirmationPage.style.display = 'block';
-    confirmationPage.style.opacity = '1';
+    confirmationPage.classList.add("show"); // Add .show class to trigger animation
 
-     // ✅ Update confirmation page content dynamically
-    confirmationMessage.innerHTML = `You have selected: <strong>${selectedActivities.join(", ")}</strong>. Your selection has been sent to your planner! ❤️📩`;
+    // Update confirmation message content
+    confirmationMessage.innerHTML = `
+        <p>You have selected: <strong>${selectedActivities.join(", ")}</strong>.</p>
+        <p>Your selection has been sent to your planner! ❤️📩</p>
+    `;
 
-     // Add smooth fade-in animation (if desired)
-    confirmationPage.style.transition = "opacity 0.5s ease-in-out";
-    confirmationPage.style.opacity = "1";
-
-    // ✅ Debugging to verify proper execution
-    console.log("Confirmation page displayed successfully. Selected activities:", selectedActivities);
+    // Debugging
+    console.log("Confirmation page displayed successfully with activities:", selectedActivities);
 }
