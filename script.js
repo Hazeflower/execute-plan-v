@@ -85,9 +85,10 @@ document.addEventListener("DOMContentLoaded", function() {
     // Add event listener for submit button
     const submitButton = document.querySelector(".submit-btn");
     if (submitButton) {
-        submitButton.removeEventListener("click", submitSelection); // Prevent duplicate event binding
-        submitButton.addEventListener("click", submitSelection);
-    }
+        submitButton.addEventListener("click", function(event) {
+        event.preventDefault(); // ✅ Prevent default form submission
+        submitSelection(event); // Call the function
+    });
 });
 
 // **Initialize Google Map**
@@ -289,8 +290,8 @@ function submitSelection(event) {
 
     // ✅ Hide itinerary page & show confirmation page smoothly
     itineraryPage.style.display = "none";
-    confirmationPage.style.display = "block";
-
+    confirmationPage.classList.add("show");
+    
     // ✅ Smooth transition effect
     setTimeout(() => {
         confirmationPage.style.opacity = "1";
