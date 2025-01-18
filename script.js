@@ -85,11 +85,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // Add event listener for submit button
     const submitButton = document.querySelector(".submit-btn");
     if (submitButton) { // Ensure button exists to avoid errors
-    submitButton.removeEventListener("click", submitSelection); // Remove any existing listener
-    submitButton.addEventListener("click", function (event) {
-        submitSelection(event); // Pass the event explicitly
-    });
-}
+    submitButton.addEventListener("click", submitSelection);
+    }
 });
 
 // **Initialize Google Map**
@@ -305,6 +302,18 @@ function submitSelection(event) {
         <p>You have selected: <strong>${selectedActivities.join(", ")}</strong>.</p>
         <p>Your selection has been sent to your planner! ❤️📩</p>
     `;
+
+    setTimeout(() => {
+    // Redirect or perform the next step after the transition
+    window.location.href = 'next-page-url.html';
+    }, 2000); // 2000ms matches a 2-second fade-in
+
+     // Reset map and markers
+    clearMarkers();
+    if (map) {
+        map.setCenter({ lat: 51.5074, lng: -0.1278 });
+        map.setZoom(12);
+    }
 
     // Debugging
     console.log("Confirmation page displayed successfully with activities:", selectedActivities);
