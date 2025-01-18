@@ -304,9 +304,8 @@ function submitSelection(event) {
     `;
 
     setTimeout(() => {
-    // Redirect or perform the next step after the transition
-    window.location.href = 'next-page-url.html';
-    }, 2000); // 2000ms matches a 2-second fade-in
+    console.log("Confirmation displayed successfully.");
+    }, 2000); // Keeps the user on the same page
 
      // Reset map and markers
     clearMarkers();
