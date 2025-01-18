@@ -84,8 +84,8 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Add event listener for submit button
     const submitButton = document.querySelector(".submit-btn");
-    if (submitButton) { // Ensure button exists to avoid errors
-    submitButton.addEventListener("click", submitSelection);
+    if (submitButton) {
+        submitButton.addEventListener("click", submitSelection, { once: true }); // Attach listener only once
     }
 });
 
@@ -252,9 +252,7 @@ function clearMarkers() {
 
 // Submit selection function
 function submitSelection(event) {
-    if (event && event.preventDefault) {
-        event.preventDefault(); // Prevent form submission
-    }
+    if (event) event.preventDefault(); // Prevent default form submission
     
     let selectedActivities = [];
     document.querySelectorAll(".itinerary-item.selected").forEach(item => {
@@ -296,6 +294,7 @@ function submitSelection(event) {
     // ✅ Hide itinerary page & show confirmation page smoothly
     itineraryPage.style.display = "none";
     confirmationPage.classList.add("show"); // Add .show class to trigger animation
+    confirmationPage.style.display = "block";
 
     // Update confirmation message content
     confirmationMessage.innerHTML = `
