@@ -84,13 +84,10 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Add event listener for submit button
     const submitButton = document.querySelector(".submit-btn");
-    if (submitButton) {
-        submitButton.addEventListener("click", function(event) {
-            event.preventDefault(); // ✅ Prevent default form submission
-            submitSelection(event); // Call the function
-        });
+    if (submitButton) { // Ensure button exists to avoid errors
+    submitButton.removeEventListener("click", submitSelection); // Remove any existing listener
+    submitButton.addEventListener("click", submitSelection); // Add the listener
     }
-});
 
 // **Initialize Google Map**
 function initMap() {
@@ -247,13 +244,15 @@ document.addEventListener("click", function () {
 
 // **Clear all markers from map**
 function clearMarkers() {
-    markers.forEach(marker => marker.setMap(null));
-    markers = [];
+    if (Array.isArray(markers)) {
+        markers.forEach(marker => marker.setMap(null));
+        markers = [];
+    }
 }
 
 // Submit selection function
 function submitSelection(event) {
-    if (event) event.preventDefault(); // ✅ Prevents the error if event is undefined
+    event.preventDefault(); // ✅ Prevents the error if event is undefined
     
     let selectedActivities = [];
     document.querySelectorAll(".itinerary-item.selected").forEach(item => {
@@ -285,16 +284,13 @@ function submitSelection(event) {
     console.error("⚠️ confirmationMessage element not found!");
     return;
     }
-    
-    // ✅ Update confirmation page content dynamically
-    confirmationMessage.innerHTML = `You have selected: <strong>${selectedActivities.join(", ")}</strong>. Your selection has been sent to your planner! ❤️📩`;
 
     // ✅ Hide itinerary page & show confirmation page smoothly
     itineraryPage.style.display = "none";
-    confirmationPage.classList.add("show");
+    confirmationPage.style.display = 'block';
+    confirmationPage.style.opacity = '1';
+
+     // ✅ Update confirmation page content dynamically
+    confirmationMessage.innerHTML = `You have selected: <strong>${selectedActivities.join(", ")}</strong>. Your selection has been sent to your planner! ❤️📩`;
     
-    // ✅ Smooth transition effect
-    setTimeout(() => {
-        confirmationPage.style.opacity = "1";
-    }, 100); // Small delay to trigger the transition
 }
