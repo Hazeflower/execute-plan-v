@@ -373,20 +373,20 @@ footer {
 
 /* Confirmation Page Styling */
 #confirmationPage {
-    display: none;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-/* Make it visible */
-.confirmation-container.show {
-    opacity: 1;
-    display: block;
+    display: none; /* Initially hidden */
+    opacity: 0; /* Fully transparent */
     justify-content: center;
     align-items: center;
     height: 100vh;
     text-align: center;
     background-color: #ffcccb;
+    transition: opacity 1s ease-in-out; /* Smooth fade-in effect */
+}
+
+/* Active state for showing the confirmation page */
+#confirmationPage.show {
+    display: flex; /* Make the container visible */
+    opacity: 1; /* Fully opaque */
 }
 
 .confirmation-container {
@@ -394,9 +394,7 @@ footer {
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
-    display: none;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+    text-align: center;
 }
 
 .email-icon {
