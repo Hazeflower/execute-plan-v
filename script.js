@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
     submitButton.removeEventListener("click", submitSelection); // Remove any existing listener
     submitButton.addEventListener("click", submitSelection); // Add the listener
     }
+});
 
 // **Initialize Google Map**
 function initMap() {
@@ -292,5 +293,7 @@ function submitSelection(event) {
 
      // ✅ Update confirmation page content dynamically
     confirmationMessage.innerHTML = `You have selected: <strong>${selectedActivities.join(", ")}</strong>. Your selection has been sent to your planner! ❤️📩`;
-    
+
+    // ✅ Debugging to verify proper execution
+    console.log("Confirmation page displayed successfully. Selected activities:", selectedActivities);
 }
