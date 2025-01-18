@@ -294,6 +294,10 @@ function submitSelection(event) {
      // ✅ Update confirmation page content dynamically
     confirmationMessage.innerHTML = `You have selected: <strong>${selectedActivities.join(", ")}</strong>. Your selection has been sent to your planner! ❤️📩`;
 
+     // Add smooth fade-in animation (if desired)
+    confirmationPage.style.transition = "opacity 0.5s ease-in-out";
+    confirmationPage.style.opacity = "1";
+
     // ✅ Debugging to verify proper execution
     console.log("Confirmation page displayed successfully. Selected activities:", selectedActivities);
 }
