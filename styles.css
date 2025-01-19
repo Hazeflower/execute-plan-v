@@ -389,6 +389,12 @@ footer {
     opacity: 1; /* Fully opaque */
 }
 
+/* Alternative: Use class-based selector (more robust) */
+.confirmation-container.show {
+    visibility: visible;
+    opacity: 1;
+}
+
 .confirmation-container {
     background: white;
     padding: 40px;
