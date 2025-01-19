@@ -14,8 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const itineraryPage = document.getElementById("itineraryPage");
     const invitationPage = document.getElementById("invitationPage");
     const mapElement = document.getElementById("map");
-    const submitButton = document.querySelector(".submit-btn");
-
+    
 
     let rejectCount = 0; // Counter for tracking rejection clicks
 
@@ -42,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Submit Button: Add listener safely
+    const submitButton = document.querySelector(".submit-btn");
     if (submitButton) {
         submitButton.replaceWith(submitButton.cloneNode(true)); // Replace button to remove all old listeners
         SubmitButton.addEventListener("click", function (event) {
