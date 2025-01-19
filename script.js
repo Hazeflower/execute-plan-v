@@ -4,8 +4,12 @@ let markers = [];
 let directionsService;
 let directionsRenderer;
 let infoWindow; // New info window for details
+let isSubmitting = false; // Prevent double execution
 
-document.addEventListener("DOMContentLoaded", function() {
+if (!window.__submitListenerAdded) {
+    window.__submitListenerAdded = true;
+
+    document.addEventListener("DOMContentLoaded", function() {
     const acceptBtn = document.getElementById("accept-btn");
     const rejectBtn = document.getElementById("reject-btn");
     const itineraryPage = document.getElementById("itineraryPage");
@@ -85,9 +89,19 @@ document.addEventListener("DOMContentLoaded", function() {
     // Add event listener for submit button
     const submitButton = document.querySelector(".submit-btn");
     if (submitButton) {
-        submitButton.addEventListener("click", submitSelection, { once: true });
-    }
-});
+            submitButton.addEventListener("click", function(event) {
+                if (isSubmitting) return; // Avoid multiple clicks
+                isSubmitting = true;
+
+                submitSelection(event);
+
+                setTimeout(() => {
+                    isSubmitting = false; // Reset after 1 second
+                }, 1000);
+            });
+        }
+    });
+}
 
 // **Initialize Google Map**
 function initMap() {
@@ -253,6 +267,8 @@ function clearMarkers() {
 // Submit selection function
 function submitSelection(event) {
     if (event) event.preventDefault(); // Prevent default form submission
+
+    console.log("submitSelection function triggered");
     
     let selectedActivities = [];
     document.querySelectorAll(".itinerary-item.selected").forEach(item => {
@@ -275,11 +291,6 @@ function submitSelection(event) {
     const confirmationPage = document.getElementById("confirmationPage");
     const confirmationMessage = document.getElementById("confirmationMessage");
 
-    // Log checks
-    console.log("Selected activities:", selectedActivities);
-    console.log("Itinerary Page:", itineraryPage);
-    console.log("Confirmation Page:", confirmationPage);
-
     // Ensure the required elements exist
     if (!itineraryPage || !confirmationPage || !confirmationMessage) {
     console.error("⚠️ Missing required elements: itineraryPage, confirmationPage, or confirmationMessage.");
@@ -293,7 +304,11 @@ function submitSelection(event) {
 
     // ✅ Hide itinerary page & show confirmation page smoothly
     itineraryPage.style.display = "none";
+    console.log("Itinerary Page hidden");
+    
     confirmationPage.style.display = "block"; // Fallback in case .show isn't working
+    console.log("Confirmation Page shown");
+    
     confirmationPage.classList.add("show"); // Smooth transition
 
     console.log("Confirmation page displayed successfully with activities:", selectedActivities);
