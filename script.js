@@ -44,8 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Submit Button: Add listener safely
     if (submitButton) {
         submitButton.replaceWith(submitButton.cloneNode(true)); // Replace button to remove all old listeners
-        const newSubmitButton = document.querySelector(".submit-btn");
-        newSubmitButton.addEventListener("click", function (event) {
+        SubmitButton.addEventListener("click", function (event) {
                 event.preventDefault();
                 event.stopPropagation(); // Prevent event propagation
                 if (isSubmitting) {
@@ -312,6 +311,7 @@ function submitSelection(event) {
     
     confirmationPage.classList.add("show"); // Smooth transition
     console.log("Confirmation Page shown");
+    console.log("Confirmation page classes:", confirmationPage.classList);
 
     console.log("Confirmation page displayed successfully with activities:", selectedActivities);
 
