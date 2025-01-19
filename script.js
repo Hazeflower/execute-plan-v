@@ -302,7 +302,3 @@ function submitSelection(event) {
         map.setZoom(12);
     }
 }
-
-    // Debugging
-    console.log("Confirmation page displayed successfully with activities:", selectedActivities);
-}
