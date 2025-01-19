@@ -281,15 +281,14 @@ function submitSelection(event) {
     return;
     }
 
+    // Update confirmation message content
+    confirmationMessage.innerHTML = `
+        <p>Activities selected: <strong>${selectedActivities.join(", ")}</strong>.</p>
+    `;
+
     // ✅ Hide itinerary page & show confirmation page smoothly
     itineraryPage.style.display = "none";
     confirmationPage.classList.add("show"); // Smooth transition
-
-    // Update confirmation message content
-    confirmationMessage.innerHTML = `
-        <p>You have selected: <strong>${selectedActivities.join(", ")}</strong>.</p>
-        <p>Your selection has been sent to your planner! ❤️📩</p>
-    `;
 
     console.log("Confirmation page displayed successfully with activities:", selectedActivities);
 
