@@ -7,6 +7,8 @@ let infoWindow; // New info window for details
 let isSubmitting = false; // Prevent double execution
 
 document.addEventListener("DOMContentLoaded", function() {
+    console.log("DOMContentLoaded triggered");
+    
     const acceptBtn = document.getElementById("accept-btn");
     const rejectBtn = document.getElementById("reject-btn");
     const itineraryPage = document.getElementById("itineraryPage");
@@ -29,76 +31,86 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // Reject Button
     if (rejectBtn) {
-        rejectBtn.addEventListener("click", function() {
+        rejectBtn.addEventListener("click", function () {
             rejectCount++;
-
-            if (rejectCount === 3) {
-                alert("Nooo please reconsider 😢");
-            } else if (rejectCount >= 4) {
-                rejectBtn.disabled = true;
-                rejectBtn.style.opacity = "0.5";
-                rejectBtn.innerText = "Too late, you HAVE to say yes now 😉";
-
-                setTimeout(() => {
-                    alert("Guess there's no escape now... 💕");
-                }, 1000); 
-
-                setTimeout(() => {
-                    alert("But if you really are busy, please tell me 😢");
-                }, 5000);
-            } else {
-                alert("Are you sure? 😢");
-
-                // Increase accept button size
-                let acceptSize = parseFloat(window.getComputedStyle(acceptBtn).fontSize);
-                acceptBtn.style.fontSize = (acceptSize + 5) + "px";
-                acceptBtn.style.padding = (acceptSize + 5) + "px " + (acceptSize + 10) + "px";
-
-                // Decrease reject button size (including padding)
-                let rejectSize = parseFloat(window.getComputedStyle(rejectBtn).fontSize);
-                let newRejectSize = Math.max(10, rejectSize - 3);
-                let newPadding = Math.max(5, rejectSize - 5) + "px " + Math.max(10, rejectSize - 10) + "px";
-
-                rejectBtn.style.fontSize = newRejectSize + "px";
-                rejectBtn.style.padding = newPadding;
-            }
+            handleRejection(rejectBtn, rejectCount);
         });
     }
 
-    // Event delegation for itinerary selection (more efficient & fixes selection issue)
-    document.addEventListener("click", function (event) {
-        let item = event.target.closest(".itinerary-item");
-        if (!item) return; // Ensure only clicks inside the item are processed
-    
-        // Check if the click happened inside an interactive element
-        if (event.target.tagName === "INPUT") return; // Avoid issues with checkboxes
-    
-        // Manually trigger the checkbox selection
-        let checkbox = item.querySelector("input[type='checkbox']");
-        if (checkbox) {
-            checkbox.checked = !checkbox.checked;
-        }
-    
-        toggleSelection(item);
-        });
-       // **Ensure submit button listener is added only once**
-        const submitButton = document.querySelector(".submit-btn");
-        if (submitButton && !submitButton.dataset.listenerAdded) {
-            submitButton.dataset.listenerAdded = true; // Mark listener as added
+    // Submit Button: Add listener safely
+    const submitButton = document.querySelector(".submit-btn");
+    if (submitButton) {
+        if (!submitButton.dataset.listenerAdded) {
+            submitButton.dataset.listenerAdded = "true";
+            console.log("Submit button listener added");
             submitButton.addEventListener("click", function (event) {
-                event.preventDefault(); // Prevent form submission
-                if (isSubmitting) return; // Avoid multiple clicks
+                event.preventDefault();
+                event.stopPropagation(); // Prevent event propagation
+                if (isSubmitting) {
+                    console.warn("Submit action already in progress");
+                    return;
+                }
                 isSubmitting = true;
-    
+
                 submitSelection(event);
-    
+
                 setTimeout(() => {
                     isSubmitting = false; // Reset after 1 second
                 }, 1000);
             });
+        } else {
+            console.warn("Submit button listener already exists");
         }
-    });
+    }
+});
+
+function handleRejection(rejectBtn, rejectCount) {
+    if (rejectCount === 3) {
+        alert("Nooo please reconsider 😢");
+    } else if (rejectCount >= 4) {
+        rejectBtn.disabled = true;
+        rejectBtn.style.opacity = "0.5";
+        rejectBtn.innerText = "Too late, you HAVE to say yes now 😉";
+
+        setTimeout(() => {
+            alert("Guess there's no escape now... 💕");
+        }, 1000);
+
+        setTimeout(() => {
+            alert("But if you really are busy, please tell me 😢");
+        }, 5000);
+    } else {
+        alert("Are you sure? 😢");
+
+        let acceptBtn = document.getElementById("accept-btn");
+        let acceptSize = parseFloat(window.getComputedStyle(acceptBtn).fontSize);
+        acceptBtn.style.fontSize = (acceptSize + 5) + "px";
+        acceptBtn.style.padding = (acceptSize + 5) + "px " + (acceptSize + 10) + "px";
+
+        let rejectSize = parseFloat(window.getComputedStyle(rejectBtn).fontSize);
+        let newRejectSize = Math.max(10, rejectSize - 3);
+        rejectBtn.style.fontSize = newRejectSize + "px";
+    }
+}
+
+// Event delegation for itinerary selection (more efficient & fixes selection issue)
+document.addEventListener("click", function (event) {
+    let item = event.target.closest(".itinerary-item");
+    if (!item) return; // Ensure only clicks inside the item are processed
+    
+    // Check if the click happened inside an interactive element
+    if (event.target.tagName === "INPUT") return; // Avoid issues with checkboxes
+    
+    // Manually trigger the checkbox selection
+    let checkbox = item.querySelector("input[type='checkbox']");
+    if (checkbox) {
+        checkbox.checked = !checkbox.checked;
+    }
+    
+    toggleSelection(item);
+});
 
 // **Initialize Google Map**
 function initMap() {
