@@ -282,8 +282,6 @@ function submitSelection(event) {
         alert("Please select at least one activity!");
         return; // ⛔ Stop execution
     }
-
-    alert("You have selected: " + selectedActivities.join(", "));
     
  // ✅ Ensure confirmationPage exists before using it
     const itineraryPage = document.getElementById("itineraryPage");
