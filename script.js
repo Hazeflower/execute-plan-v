@@ -6,10 +6,7 @@ let directionsRenderer;
 let infoWindow; // New info window for details
 let isSubmitting = false; // Prevent double execution
 
-if (!window.__submitListenerAdded) {
-    window.__submitListenerAdded = true;
-
-    document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
     const acceptBtn = document.getElementById("accept-btn");
     const rejectBtn = document.getElementById("reject-btn");
     const itineraryPage = document.getElementById("itineraryPage");
@@ -85,8 +82,23 @@ if (!window.__submitListenerAdded) {
     
         toggleSelection(item);
         });
+       // **Ensure submit button listener is added only once**
+        const submitButton = document.querySelector(".submit-btn");
+        if (submitButton && !submitButton.dataset.listenerAdded) {
+            submitButton.dataset.listenerAdded = true; // Mark listener as added
+            submitButton.addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent form submission
+                if (isSubmitting) return; // Avoid multiple clicks
+                isSubmitting = true;
+    
+                submitSelection(event);
+    
+                setTimeout(() => {
+                    isSubmitting = false; // Reset after 1 second
+                }, 1000);
+            });
+        }
     });
-}
 
 // **Initialize Google Map**
 function initMap() {
@@ -251,7 +263,6 @@ function clearMarkers() {
 
 // Submit selection function
 function submitSelection(event) {
-    if (event) event.preventDefault(); // Prevent default form submission
     console.log("submitSelection function triggered");
     
     let selectedActivities = [];
@@ -302,27 +313,3 @@ function submitSelection(event) {
         map.setZoom(12);
     }
 }
-
-// Add event listener for the submit button (ensure added only once)
-let isSubmitListenerAdded = false; // Track listener addition
-
-document.addEventListener("DOMContentLoaded", function () {
-    const submitButton = document.querySelector(".submit-btn");
-   
-    if (submitButton && !isSubmitListenerAdded) {
-        isSubmitListenerAdded = true;
-        console.log("Submit button listener added");
-
-        submitButton.addEventListener("click", function (event) {
-            event.preventDefault(); // Prevent form submission
-            if (isSubmitting) return; // Avoid multiple clicks
-            isSubmitting = true;
-
-            submitSelection(event);
-
-            setTimeout(() => {
-                isSubmitting = false; // Reset after 1 second
-            }, 1000);
-            });
-        }
-});
