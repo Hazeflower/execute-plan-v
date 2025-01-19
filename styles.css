@@ -375,6 +375,7 @@ footer {
 #confirmationPage {
     visibility: hidden; /* Element is invisible but takes space */
     opacity: 0; /* Fully transparent */
+    display: flex; /* Ensure it's in the layout */
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -387,12 +388,6 @@ footer {
 #confirmationPage.show {
     visibility: visible; /* Element becomes visible */
     opacity: 1; /* Fully opaque */
-}
-
-/* Alternative: Use class-based selector (more robust) */
-.confirmation-container.show {
-    visibility: visible;
-    opacity: 1;
 }
 
 .confirmation-container {
