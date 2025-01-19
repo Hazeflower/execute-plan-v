@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const itineraryPage = document.getElementById("itineraryPage");
     const invitationPage = document.getElementById("invitationPage");
     const mapElement = document.getElementById("map");
+    const submitButton = document.querySelector(".submit-btn");
+
 
     let rejectCount = 0; // Counter for tracking rejection clicks
 
@@ -40,12 +42,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Submit Button: Add listener safely
-    const submitButton = document.querySelector(".submit-btn");
     if (submitButton) {
-        if (!submitButton.dataset.listenerAdded) {
-            submitButton.dataset.listenerAdded = "true";
-            console.log("Submit button listener added");
-            submitButton.addEventListener("click", function (event) {
+        submitButton.replaceWith(submitButton.cloneNode(true)); // Replace button to remove all old listeners
+        const newSubmitButton = document.querySelector(".submit-btn");
+        newSubmitButton.addEventListener("click", function (event) {
                 event.preventDefault();
                 event.stopPropagation(); // Prevent event propagation
                 if (isSubmitting) {
@@ -60,10 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     isSubmitting = false; // Reset after 1 second
                 }, 1000);
             });
-        } else {
-            console.warn("Submit button listener already exists");
         }
-    }
 });
 
 function handleRejection(rejectBtn, rejectCount) {
