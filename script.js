@@ -84,22 +84,7 @@ if (!window.__submitListenerAdded) {
         }
     
         toggleSelection(item);
-    });
-    
-    // Add event listener for submit button
-    const submitButton = document.querySelector(".submit-btn");
-    if (submitButton && !submitButton.dataset.listenerAdded) {
-            submitButton.addEventListener("click", function(event) {
-                if (isSubmitting) return; // Avoid multiple clicks
-                isSubmitting = true;
-
-                submitSelection(event);
-
-                setTimeout(() => {
-                    isSubmitting = false; // Reset after 1 second
-                }, 1000);
-            });
-        }
+        });
     });
 }
 
@@ -282,6 +267,8 @@ function submitSelection(event) {
         alert("Please select at least one activity!");
         return; // ⛔ Stop execution
     }
+
+    alert("You have selected: " + selectedActivities.join(", "));
     
  // ✅ Ensure confirmationPage exists before using it
     const itineraryPage = document.getElementById("itineraryPage");
@@ -315,3 +302,27 @@ function submitSelection(event) {
         map.setZoom(12);
     }
 }
+
+// Add event listener for the submit button (ensure added only once)
+let isSubmitListenerAdded = false; // Track listener addition
+
+document.addEventListener("DOMContentLoaded", function () {
+    const submitButton = document.querySelector(".submit-btn");
+   
+    if (submitButton && !isSubmitListenerAdded) {
+        isSubmitListenerAdded = true;
+        console.log("Submit button listener added");
+
+        submitButton.addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent form submission
+            if (isSubmitting) return; // Avoid multiple clicks
+            isSubmitting = true;
+
+            submitSelection(event);
+
+            setTimeout(() => {
+                isSubmitting = false; // Reset after 1 second
+            }, 1000);
+            });
+        }
+});
