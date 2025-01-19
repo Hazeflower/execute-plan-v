@@ -397,6 +397,12 @@ footer {
     text-align: center;
 }
 
+#confirmationMessage {
+  margin-top: 15px; /* Add space between static and dynamic content */
+  font-size: 1.1em; /* Slightly larger text for visibility */
+  color: #555; /* Subtle grey for distinction */
+}
+
 .email-icon {
     width: 80px;
     margin-bottom: 20px;
