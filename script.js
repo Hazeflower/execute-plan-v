@@ -84,9 +84,9 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Add event listener for submit button
     const submitButton = document.querySelector(".submit-btn");
-    if (submitButton) { // Ensure button exists to avoid errors
-        submitButton.removeEventListener("click", submitSelection); // Remove any existing listener
-        submitButton.addEventListener("click", submitSelection); // Add the listener
+    if (submitButton) {
+        submitButton.removeEventListener("click", submitSelection); // Clear previous listeners
+        submitButton.addEventListener("click", submitSelection, { once: true });
     }
 });
 
@@ -278,24 +278,14 @@ function submitSelection(event) {
 
     // Ensure the required elements exist
     if (!itineraryPage || !confirmationPage || !confirmationMessage) {
-        console.error("⚠️ Missing one or more required elements!");
-        return;
-    }
-
-    if (!confirmationPage) {
-        console.error("⚠️ Confirmation page element not found! The page transition will be skipped.");
-        return;
-    }
-    
-    if (!confirmationMessage) {
-    console.error("⚠️ confirmationMessage element not found!");
+    console.error("⚠️ Missing required elements: itineraryPage, confirmationPage, or confirmationMessage.");
     return;
     }
 
     // ✅ Hide itinerary page & show confirmation page smoothly
     itineraryPage.style.display = "none";
-    confirmationPage.classList.add("show"); // Add .show class to trigger animation
-    confirmationPage.style.display = "block";
+    confirmationPage.style.display = "block"; // Ensure it's visible
+    confirmationPage.classList.add("show"); // Smooth transition
 
     // Update confirmation message content
     confirmationMessage.innerHTML = `
@@ -303,16 +293,15 @@ function submitSelection(event) {
         <p>Your selection has been sent to your planner! ❤️📩</p>
     `;
 
-    setTimeout(() => {
-    console.log("Confirmation displayed successfully.");
-    }, 2000); // Keeps the user on the same page
+    console.log("Confirmation page displayed successfully with activities:", selectedActivities);
 
-     // Reset map and markers
+    // Reset the map
     clearMarkers();
     if (map) {
         map.setCenter({ lat: 51.5074, lng: -0.1278 });
         map.setZoom(12);
     }
+}
 
     // Debugging
     console.log("Confirmation page displayed successfully with activities:", selectedActivities);
