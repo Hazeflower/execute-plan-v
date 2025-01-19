@@ -385,7 +385,7 @@ footer {
 
 /* Active state for showing the confirmation page */
 #confirmationPage.show {
-    display: flex; /* Make the container visible */
+    display: block; /* Make the container visible */
     opacity: 1; /* Fully opaque */
 }
 
