@@ -88,7 +88,7 @@ if (!window.__submitListenerAdded) {
     
     // Add event listener for submit button
     const submitButton = document.querySelector(".submit-btn");
-    if (submitButton) {
+    if (submitButton && !submitButton.dataset.listenerAdded) {
             submitButton.addEventListener("click", function(event) {
                 if (isSubmitting) return; // Avoid multiple clicks
                 isSubmitting = true;
@@ -267,7 +267,6 @@ function clearMarkers() {
 // Submit selection function
 function submitSelection(event) {
     if (event) event.preventDefault(); // Prevent default form submission
-
     console.log("submitSelection function triggered");
     
     let selectedActivities = [];
@@ -306,10 +305,8 @@ function submitSelection(event) {
     itineraryPage.style.display = "none";
     console.log("Itinerary Page hidden");
     
-    confirmationPage.style.display = "block"; // Fallback in case .show isn't working
-    console.log("Confirmation Page shown");
-    
     confirmationPage.classList.add("show"); // Smooth transition
+    console.log("Confirmation Page shown");
 
     console.log("Confirmation page displayed successfully with activities:", selectedActivities);
 
