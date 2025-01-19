@@ -275,6 +275,11 @@ function submitSelection(event) {
     const confirmationPage = document.getElementById("confirmationPage");
     const confirmationMessage = document.getElementById("confirmationMessage");
 
+    // Log checks
+    console.log("Selected activities:", selectedActivities);
+    console.log("Itinerary Page:", itineraryPage);
+    console.log("Confirmation Page:", confirmationPage);
+
     // Ensure the required elements exist
     if (!itineraryPage || !confirmationPage || !confirmationMessage) {
     console.error("⚠️ Missing required elements: itineraryPage, confirmationPage, or confirmationMessage.");
@@ -288,6 +293,7 @@ function submitSelection(event) {
 
     // ✅ Hide itinerary page & show confirmation page smoothly
     itineraryPage.style.display = "none";
+    confirmationPage.style.display = "block"; // Fallback in case .show isn't working
     confirmationPage.classList.add("show"); // Smooth transition
 
     console.log("Confirmation page displayed successfully with activities:", selectedActivities);
