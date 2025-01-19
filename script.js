@@ -85,7 +85,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Add event listener for submit button
     const submitButton = document.querySelector(".submit-btn");
     if (submitButton) {
-        submitButton.removeEventListener("click", submitSelection); // Clear previous listeners
         submitButton.addEventListener("click", submitSelection, { once: true });
     }
 });
@@ -284,7 +283,6 @@ function submitSelection(event) {
 
     // ✅ Hide itinerary page & show confirmation page smoothly
     itineraryPage.style.display = "none";
-    confirmationPage.style.display = "block"; // Ensure it's visible
     confirmationPage.classList.add("show"); // Smooth transition
 
     // Update confirmation message content
