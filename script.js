@@ -310,12 +310,13 @@ function submitSelection(event) {
 
     // ✅ Hide itinerary page & show confirmation page smoothly
     itineraryPage.style.display = "none";
-    console.log("Itinerary Page hidden");
+    console.log("Itinerary Page visibility after hiding:", itineraryPage.style.display);
     
     confirmationPage.style.display = "flex"; // Ensure confirmationPage is displayed
     confirmationPage.classList.add("show"); // Add show class for styling
-    console.log("Confirmation Page shown with class:", confirmationPage.classList);
-
+    console.log("Confirmation Page visibility after showing:", confirmationPage.style.display);
+    console.log("Confirmation Page classes after showing:", confirmationPage.classList);
+    
     console.log("Itinerary Page Display:", itineraryPage.style.display);
     console.log("Confirmation Page Display:", confirmationPage.style.display);
     console.log("Confirmation Page Classes:", confirmationPage.classList);
