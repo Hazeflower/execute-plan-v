@@ -373,7 +373,7 @@ footer {
 
 /* Confirmation Page Styling */
 #confirmationPage {
-    display: none; /* Hidden by default */
+    outline: 5px solid red !important;
     visibility: hidden; /* Element is invisible but takes space */
     opacity: 0; /* Fully transparent */
     justify-content: center;
@@ -387,8 +387,6 @@ footer {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
 }
 
 /* Active state for showing the confirmation page */
