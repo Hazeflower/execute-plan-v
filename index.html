@@ -8,7 +8,122 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdPAQnf7GgnjYvhCglti-Pj3w1tzPSrbY&libraries=places&callback=initMap"></script>
 </head>
 <body>
-    
+
+    <!-- First Page: Valentine's Invitation -->
+    <div id="invitationPage" class="container">
+        <header>
+            <h1>Valentine's Day Invitation</h1>
+        </header>
+        <main>
+            <section class="message">
+                <h2>Haerimahh, My Dear Vampire Baby 💖</h2>
+                <p>Will you be my Valentine? 🥺 <br> Let’s make our 100th (&101st) day unforgettable!</p>
+            </section>
+
+            <section class="date-details">
+                <h3>Friday 14th itinerary:</h3>
+                <p>🤩 A star-studded dinner at ******, just the two of us. <br> 🌟 City-night views to marvel at from ***** <br> 💕 Will you say yes?</p>
+            </section>
+
+            <section class="date-details">
+                     <h3>Saturday 15th itinerary:</h3>
+                    <p>❔ Press Accept and we can plan it out 😉 </p>
+            </section>
+
+            <button class="invite-btn" id="accept-btn">I Accept! Let's Go! 🥂</button>
+            <button class="invite-btn" id="reject-btn">Nah I'm busy 😭</button>
+        </main>
+
+        <!-- Footer on First Page -->
+        <footer class="footer">
+            <p>Created with love by your third fav Korean 🥰 <br> Ft. JavaScript, HTML & CSS 😚</p>
+        </footer>
+    </div> <!-- End of Invitation Page -->
+
+    <!-- Second Page: Itinerary page once accepted -->
+    <div id="itineraryPage" class="main-container" style="display: none;">
+
+         <!-- Centered White Section Box -->
+        <div class="white-box">
+        <h1>Choose Your Valentine's Day Itinerary</h1>
+            <div class="content-wrapper">
+                <!-- Left Side: Itinerary Selection -->
+                <div class="itinerary-section">
+                    <div class="itinerary-category">
+                        <h2 class="category-title">Food & Dining</h2>
+                        <div class="itinerary-grid">
+                            <label class="itinerary-item" data-place="Gaucho Tower Bridge, London">
+                                <input type="checkbox" name="activity" value="Romantic Dinner" hidden>
+                                <img src="images/Romantic Dinner.jpg" alt="Romantic Dinner" class="activity-img">
+                                <div class="tick">✔</div>
+                                <span>Romantic Dinner 🍽️</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="itinerary-category">
+                        <h2 class="category-title">Activities</h2>
+                        <div class="itinerary-grid">
+                            <label class="itinerary-item" data-place="London Eye, London">
+                                <input type="checkbox" name="activity" value="Beach Walk" hidden>
+                                <img src="images/Beach Walk.jpg" alt="Beach Walk" class="activity-img">
+                                <div class="tick">✔</div>
+                                <span>Beach Walk 🌊</span>
+                            </label>
+
+                            <label class="itinerary-item" data-place="THE CUBE Canary Wharf, London">
+                                <input type="checkbox" name="activity" value="The cube" hidden>
+                                <img src="images/thecube.jpg" alt="The cube" class="activity-img">
+                                <div class="tick">✔</div>
+                                <span>The Cube 🎲 </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="itinerary-category">
+                        <h2 class="category-title">Quality Time</h2>
+                        <div class="itinerary-grid">
+                            <label class="itinerary-item" data-place="The Shard, London">
+                                <input type="checkbox" name="activity" value="Movie Night" hidden>
+                                <img src="images/Movie.jpg" alt="Cinema" class="activity-img">
+                                <div class="tick">✔</div>
+                                <span>Movie Night 🎬</span>
+                            </label>
+
+                            <label class="itinerary-item" data-place="The Shard, London">
+                                <input type="checkbox" name="activity" value="Stargazing" hidden>
+                                <img src="images/Stargazing.jpg" alt="Stargazing" class="activity-img">
+                                <div class="tick">✔</div>
+                                <span>Stargazing ✨</span>
+                            </label>
+
+                            <label class="itinerary-item" data-place="Stratford International, London">
+                                <input type="checkbox" name="activity" value="Homecooking" hidden>
+                                <img src="images/Homecooking.jpg" alt="Homecooking" class="activity-img">
+                                <div class="tick">✔</div>
+                                <span>Bf's cooking ❤️</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side: Map Section -->
+                <div class="map-section">
+                    <div class="map-container">
+                        <div id="map"></div>
+                            <div id="place-details" class="place-details-container"></div>
+                    </div>
+                    <button type="submit" class="submit-btn" >Confirm Selection</button>
+                </div>
+
+            <!-- Footer inside the white box -->
+            <footer class="footer">
+                <p>Created with love by your third fav Korean 🥰 <br> Ft. JavaScript, HTML & CSS 😚</p>
+            </footer>
+        </div> <!-- End of White Box -->
+
+    </div> <!-- End of Itinerary Page -->
+
     <!-- Confirmation Page (Initially Hidden) -->
     <div id="confirmationPage" class="confirmation-container">
         <img src="images/email-icon.png" class="email-icon">
