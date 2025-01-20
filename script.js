@@ -294,6 +294,7 @@ function submitSelection(event) {
  // ✅ Ensure confirmationPage exists before using it
     const itineraryPage = document.getElementById("itineraryPage");
     const confirmationPage = document.getElementById("confirmationPage");
+    console.log("Confirmation page exists?", !!confirmationPage);
     const confirmationMessage = document.getElementById("confirmationMessage");
 
     // Ensure the required elements exist
@@ -312,6 +313,7 @@ function submitSelection(event) {
     console.log("Itinerary Page hidden");
     
     confirmationPage.classList.add("show"); // Smooth transition
+    console.log("Confirmation page state:", window.getComputedStyle(confirmationPage));
     console.log("Confirmation Page shown");
     console.log("Confirmation page classes:", confirmationPage.classList);
 
