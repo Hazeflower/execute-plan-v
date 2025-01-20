@@ -315,9 +315,6 @@ function submitSelection(event) {
     console.log("Confirmation Page shown");
     console.log("Confirmation page classes:", confirmationPage.classList);
 
-    // Optional: Ensure display is not set to none
-    confirmationPage.style.display = "flex"; // Ensure it's rendered properly
-
     console.log("Confirmation page displayed successfully with activities:", selectedActivities);
 
     // Reset the map
