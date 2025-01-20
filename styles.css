@@ -108,6 +108,11 @@ footer {
 }
 
 /* ---------------- ITINERARY PAGE ---------------- */
+#itineraryPage {
+    display: none; /* Ensure it is hidden */
+    position: relative; /* Set relative positioning for clarity */
+    z-index: 1; /* Lower layer than confirmationPage */
+}
 
 /* White Box Container */
 .page-container {
@@ -377,14 +382,12 @@ footer {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    width: 100%;
-    text-align: center;
+    width: 100vw; /* Ensure it spans the entire viewport */
     background-color: #ffcccb;
-    z-index: 9999; /* Ensure it's above all other elements */
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 9999; /* Highest layer */
+    z-index: 9999; /* Ensure it's above all other elements */
 }
 
 /* Active state for showing the confirmation page */
