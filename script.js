@@ -1,3 +1,14 @@
+window.onload = function () {
+    const confirmationPage = document.getElementById("confirmationPage");
+    if (confirmationPage) {
+        confirmationPage.style.display = "flex"; // Make it visible
+        confirmationPage.classList.add("show"); // Add the show class for styling
+        console.log("Confirmation Page force-loaded on page load");
+    } else {
+        console.error("Confirmation Page element not found!");
+    }
+};
+
 let map;
 let placesService;
 let markers = [];
