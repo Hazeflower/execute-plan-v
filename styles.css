@@ -373,9 +373,9 @@ footer {
 
 /* Confirmation Page Styling */
 #confirmationPage {
+    display: none; /* Hidden by default */
     visibility: hidden; /* Element is invisible but takes space */
     opacity: 0; /* Fully transparent */
-    display: flex; /* Ensure it's in the layout */
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -386,6 +386,7 @@ footer {
 
 /* Active state for showing the confirmation page */
 #confirmationPage.show {
+    display: flex; /* Render the page */
     visibility: visible; /* Element becomes visible */
     opacity: 1; /* Fully opaque */
 }
