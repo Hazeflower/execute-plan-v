@@ -312,12 +312,14 @@ function submitSelection(event) {
     itineraryPage.style.display = "none";
     console.log("Itinerary Page hidden");
     
-    confirmationPage.classList.add("show"); // Smooth transition
-    console.log("Confirmation page state:", window.getComputedStyle(confirmationPage));
-    console.log("Confirmation Page shown");
-    console.log("Confirmation page classes:", confirmationPage.classList);
-    confirmationPage.style.display = "flex"; // Ensures it renders properly
+    confirmationPage.style.display = "flex"; // Ensure confirmationPage is displayed
+    confirmationPage.classList.add("show"); // Add show class for styling
+    console.log("Confirmation Page shown with class:", confirmationPage.classList);
 
+    console.log("Itinerary Page Display:", itineraryPage.style.display);
+    console.log("Confirmation Page Display:", confirmationPage.style.display);
+    console.log("Confirmation Page Classes:", confirmationPage.classList);
+    
     console.log("Confirmation page displayed successfully with activities:", selectedActivities);
 
     // Reset the map
