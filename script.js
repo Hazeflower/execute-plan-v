@@ -275,50 +275,44 @@ function clearMarkers() {
 function submitSelection(event) {
     console.log("submitSelection function triggered");
     
+    const itineraryPage = document.getElementById("itineraryPage");
+    const confirmationPage = document.getElementById("confirmationPage");
+    const confirmationMessage = document.getElementById("confirmationMessage");
+
+    if (!itineraryPage || !confirmationPage || !confirmationMessage) {
+        console.error("⚠️ Missing required elements!");
+        return;
+    }
+
+    // Ensure user selects at least one activity
     let selectedActivities = [];
     document.querySelectorAll(".itinerary-item.selected").forEach(item => {
-        let inputElement = item.querySelector("input[type='checkbox']");
+        const inputElement = item.querySelector("input[type='checkbox']");
         if (inputElement) {
             selectedActivities.push(inputElement.value);
         }
     });
 
-    // ✅ Ensure user selects at least one activity
     if (selectedActivities.length === 0) {
         alert("Please select at least one activity!");
-        return; // ⛔ Stop execution
+        return;
     }
 
-    alert("You have selected: " + selectedActivities.join(", "));
-    
- // ✅ Ensure confirmationPage exists before using it
-    const itineraryPage = document.getElementById("itineraryPage");
-    const confirmationPage = document.getElementById("confirmationPage");
-    const confirmationMessage = document.getElementById("confirmationMessage");
-
-    // Ensure the required elements exist
-    if (!itineraryPage || !confirmationPage || !confirmationMessage) {
-    console.error("⚠️ Missing required elements: itineraryPage, confirmationPage, or confirmationMessage.");
-    return;
-    }
-
-    // Update confirmation message content
+    // Update the confirmation message
     confirmationMessage.innerHTML = `
         <p>Activities selected: <strong>${selectedActivities.join(", ")}</strong>.</p>
     `;
 
-    // Ensure proper page toggling
-    console.log("Hiding Itinerary Page and showing Confirmation Page");
-    itineraryPage.style.display = "none"; // Hide the itinerary page
-    confirmationPage.style.display = "flex"; // Show the confirmation page
-    confirmationPage.classList.add("show"); // Add styling for animations
+    // Toggle pages
+    itineraryPage.style.display = "none"; // Hide itineraryPage
+    confirmationPage.style.display = "flex"; // Show confirmationPage
+    confirmationPage.classList.add("show"); // Add show class for animations
 
     // Debugging logs
-    console.log("Itinerary Page Display after hiding:", itineraryPage.style.display);
-    console.log("Confirmation Page Display after showing:", confirmationPage.style.display);
-    console.log("Confirmation Page Classes:", confirmationPage.classList);
+    console.log("Itinerary Page display:", itineraryPage.style.display);
+    console.log("Confirmation Page display:", confirmationPage.style.display);
 
-    // Reset the map
+    // Reset map markers if necessary
     clearMarkers();
     if (map) {
         map.setCenter({ lat: 51.5074, lng: -0.1278 });
