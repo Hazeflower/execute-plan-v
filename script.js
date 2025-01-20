@@ -1,14 +1,3 @@
-window.onload = function () {
-    const confirmationPage = document.getElementById("confirmationPage");
-    if (confirmationPage) {
-        confirmationPage.style.display = "flex"; // Make it visible
-        confirmationPage.classList.add("show"); // Add the show class for styling
-        console.log("Confirmation Page force-loaded on page load");
-    } else {
-        console.error("Confirmation Page element not found!");
-    }
-};
-
 let map;
 let placesService;
 let markers = [];
@@ -305,7 +294,6 @@ function submitSelection(event) {
  // ✅ Ensure confirmationPage exists before using it
     const itineraryPage = document.getElementById("itineraryPage");
     const confirmationPage = document.getElementById("confirmationPage");
-    console.log("Confirmation page exists?", !!confirmationPage);
     const confirmationMessage = document.getElementById("confirmationMessage");
 
     // Ensure the required elements exist
@@ -319,20 +307,16 @@ function submitSelection(event) {
         <p>Activities selected: <strong>${selectedActivities.join(", ")}</strong>.</p>
     `;
 
-    // ✅ Hide itinerary page & show confirmation page smoothly
-    itineraryPage.style.display = "none";
-    console.log("Itinerary Page visibility after hiding:", itineraryPage.style.display);
-    
-    confirmationPage.style.display = "flex"; // Ensure confirmationPage is displayed
-    confirmationPage.classList.add("show"); // Add show class for styling
-    console.log("Confirmation Page visibility after showing:", confirmationPage.style.display);
-    console.log("Confirmation Page classes after showing:", confirmationPage.classList);
-    
-    console.log("Itinerary Page Display:", itineraryPage.style.display);
-    console.log("Confirmation Page Display:", confirmationPage.style.display);
+    // Ensure proper page toggling
+    console.log("Hiding Itinerary Page and showing Confirmation Page");
+    itineraryPage.style.display = "none"; // Hide the itinerary page
+    confirmationPage.style.display = "flex"; // Show the confirmation page
+    confirmationPage.classList.add("show"); // Add styling for animations
+
+    // Debugging logs
+    console.log("Itinerary Page Display after hiding:", itineraryPage.style.display);
+    console.log("Confirmation Page Display after showing:", confirmationPage.style.display);
     console.log("Confirmation Page Classes:", confirmationPage.classList);
-    
-    console.log("Confirmation page displayed successfully with activities:", selectedActivities);
 
     // Reset the map
     clearMarkers();
