@@ -316,6 +316,7 @@ function submitSelection(event) {
     console.log("Confirmation page state:", window.getComputedStyle(confirmationPage));
     console.log("Confirmation Page shown");
     console.log("Confirmation page classes:", confirmationPage.classList);
+    confirmationPage.style.display = "flex"; // Ensures it renders properly
 
     console.log("Confirmation page displayed successfully with activities:", selectedActivities);
 
