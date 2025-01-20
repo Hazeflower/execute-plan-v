@@ -380,7 +380,6 @@ footer {
     width: 100%;
     text-align: center;
     background-color: #ffcccb;
-    transition: opacity 1s ease-in-out; /* Smooth fade-in effect */
     z-index: 9999; /* Ensure it's above all other elements */
     position: fixed;
     top: 0;
