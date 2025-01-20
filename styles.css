@@ -382,6 +382,8 @@ footer {
     text-align: center;
     background-color: #ffcccb;
     transition: opacity 1s ease-in-out; /* Smooth fade-in effect */
+    z-index: 1000;
+    position: relative;
 }
 
 /* Active state for showing the confirmation page */
