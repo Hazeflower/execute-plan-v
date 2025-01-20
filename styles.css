@@ -373,10 +373,7 @@ footer {
 
 /* Confirmation Page Styling */
 #confirmationPage {
-    outline: 5px solid red !important;
     display: none; /* Hidden by default */
-    /* visibility: hidden; /* Element is invisible but takes space */
-    /* opacity: 0; /* Fully transparent *//
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -388,13 +385,12 @@ footer {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 9999; /* Highest layer */
 }
 
 /* Active state for showing the confirmation page */
 #confirmationPage.show {
     display: flex !important; /* Render the page */
-    /* visibility: visible !important; /* Element becomes visible */
-    /* opacity: 1 !important; /* Fully opaque */
 }
 
 .confirmation-container {
