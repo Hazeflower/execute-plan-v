@@ -321,6 +321,6 @@ function submitSelection(event) {
         <p>Activities selected: <strong>${selectedActivities.join(", ")}</strong>.</p>
     `;
 
-    resetItineraryPage();
     togglePageVisibility([confirmationPage], [itineraryPage]);
+    resetItineraryPage();    
 }
