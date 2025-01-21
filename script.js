@@ -4,34 +4,49 @@ let markers = [];
 let directionsService;
 let directionsRenderer;
 let infoWindow; // New info window for details
-let isSubmitting = false; // Prevent double execution
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     console.log("DOMContentLoaded triggered");
-    
+
     const acceptBtn = document.getElementById("accept-btn");
     const rejectBtn = document.getElementById("reject-btn");
     const itineraryPage = document.getElementById("itineraryPage");
     const invitationPage = document.getElementById("invitationPage");
+    const confirmationPage = document.getElementById("confirmationPage");
     const mapElement = document.getElementById("map");
+    const submitButton = document.querySelector(".submit-btn");
+    const confirmationMessage = document.getElementById("confirmationMessage");
 
     let rejectCount = 0; // Counter for tracking rejection clicks
 
-    // Ensure elements exist before adding event listeners
-    if (acceptBtn && itineraryPage && invitationPage) {
-        acceptBtn.addEventListener("click", function() {
-            alert("Yay! Can't wait for our special date! 💖");
-            invitationPage.style.display = "none";
-            itineraryPage.style.display = "block";
+    // Page toggle utility
+    function togglePageVisibility(pagesToShow = [], pagesToHide = []) {
+        pagesToShow.forEach((page) => {
+            page.style.display = "block";
+            page.classList.add("show");
+            page.classList.remove("hide");
+        });
+        pagesToHide.forEach((page) => {
+            page.style.display = "none";
+            page.classList.add("hide");
+            page.classList.remove("show");
+        });
+    }
 
-            // ✅ Only initialise the map when the itinerary page is shown
+    // Accept Button Logic
+    if (acceptBtn && itineraryPage && invitationPage) {
+        acceptBtn.addEventListener("click", function () {
+            alert("Yay! Can't wait for our special date! 💖");
+            togglePageVisibility([itineraryPage], [invitationPage]);
+
+            // Initialise the map when the itinerary page is shown
             if (mapElement && !map) {
                 initMap();
             }
         });
     }
 
-    // Reject Button
+    // Reject Button Logic
     if (rejectBtn) {
         rejectBtn.addEventListener("click", function () {
             rejectCount++;
@@ -39,31 +54,37 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Submit Button: Add listener safely
-    const submitButton = document.querySelector(".submit-btn");
-    if (submitButton && !submitButton.dataset.listenerAdded) {
-            submitButton.dataset.listenerAdded = "true";
-            console.log("Submit button found, adding event listener...");
-            submitButton.addEventListener("click", function (event) {
-                event.preventDefault();
-                event.stopPropagation(); // Prevent event propagation
-                if (isSubmitting) {
-                    console.warn("Submit action already in progress");
-                    return;
-                }
-                isSubmitting = true;
+    // Submit Button Logic
+    if (submitButton) {
+        submitButton.removeEventListener("click", submitSelection); // Ensure no duplicate listeners
+        submitButton.addEventListener("click", submitSelection);
+    } else {
+        console.warn("Submit button not found on initial load");
+    }
 
-                submitSelection(event);
+    // Event delegation for itinerary selection
+    document.addEventListener("click", function (event) {
+        let item = event.target.closest(".itinerary-item");
+        if (!item) return;
 
-                setTimeout(() => {
-                    isSubmitting = false; // Reset after 1 second
-                }, 1000);
-            });
-        } else {
-    console.warn("Submit button not found on initial load");
+        // Prevent issues with checkbox clicks
+        if (event.target.tagName === "INPUT") return;
+
+        // Manually toggle the checkbox and selection state
+        let checkbox = item.querySelector("input[type='checkbox']");
+        if (checkbox) {
+            checkbox.checked = !checkbox.checked;
         }
+        toggleSelection(item);
+    });
+
+    // Call hideDetailsPanel whenever an activity is toggled
+    document.addEventListener("click", function () {
+        hideDetailsPanel();
+    });
 });
 
+// Handle rejection clicks
 function handleRejection(rejectBtn, rejectCount) {
     if (rejectCount === 3) {
         alert("Nooo please reconsider 😢");
@@ -93,35 +114,18 @@ function handleRejection(rejectBtn, rejectCount) {
     }
 }
 
-// Event delegation for itinerary selection (more efficient & fixes selection issue)
-document.addEventListener("click", function (event) {
-    let item = event.target.closest(".itinerary-item");
-    if (!item) return; // Ensure only clicks inside the item are processed
-    
-    // Check if the click happened inside an interactive element
-    if (event.target.tagName === "INPUT") return; // Avoid issues with checkboxes
-    
-    // Manually trigger the checkbox selection
-    let checkbox = item.querySelector("input[type='checkbox']");
-    if (checkbox) {
-        checkbox.checked = !checkbox.checked;
-    }
-    
-    toggleSelection(item);
-});
-
-// **Initialize Google Map**
+// Initialise Google Map
 function initMap() {
     if (!document.getElementById("map")) {
         console.error("Map element not found!");
         return;
     }
-    
-     map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: 51.5074, lng: -0.1278 }, // Default to London
-            zoom: 12,
-        });
-                              
+
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 51.5074, lng: -0.1278 }, // Default to London
+        zoom: 12,
+    });
+
     directionsService = new google.maps.DirectionsService();
     directionsRenderer = new google.maps.DirectionsRenderer();
     directionsRenderer.setMap(map);
@@ -129,7 +133,7 @@ function initMap() {
     infoWindow = new google.maps.InfoWindow();
 }
 
-// Toggle selection function
+// Toggle selection of itinerary items
 function toggleSelection(item) {
     item.classList.toggle("selected");
 
@@ -149,18 +153,15 @@ function toggleSelection(item) {
 
     tick.style.display = checkbox.checked ? "flex" : "none";
 
-    // Debugging log
-    console.log(`Clicked: ${item.innerText}, Selected: ${checkbox.checked}`);
-
-    let placeName = item.getAttribute("data-place"); // Get place name instead of placeId
+    let placeName = item.getAttribute("data-place");
     if (placeName) {
-        updateMap(placeName); // ✅ Ensure correct place is passed
+        updateMap(placeName);
     } else {
         console.error("No place name found for selected item.");
     }
 }
 
-// **Update Map dynamically using Place Names**
+// Update the map based on selected places
 function updateMap() {
     clearMarkers();
     let selectedItems = document.querySelectorAll(".itinerary-item.selected");
@@ -173,8 +174,8 @@ function updateMap() {
         return;
     }
 
-    selectedItems.forEach(item => {
-        let placeName = item.getAttribute("data-place"); // ✅ Correctly retrieve placeName
+    selectedItems.forEach((item) => {
+        let placeName = item.getAttribute("data-place");
         if (!placeName) return;
 
         placesService.findPlaceFromQuery(
@@ -183,7 +184,7 @@ function updateMap() {
                 if (status === google.maps.places.PlacesServiceStatus.OK && results[0]) {
                     let position = results[0].geometry.location;
                     let placeId = results[0].place_id;
-                    
+
                     let marker = new google.maps.Marker({
                         position,
                         map,
@@ -197,15 +198,13 @@ function updateMap() {
                     markers.push(marker);
                     bounds.extend(position);
 
-                    // If there's only one selected place, use panTo + setZoom
                     if (selectedItems.length === 1) {
                         map.panTo(position);
-                        map.setZoom(14);  // Zoom in when only one place is selected
+                        map.setZoom(14);
                     } else {
-                        map.fitBounds(bounds); // FitBounds for multiple places
+                        map.fitBounds(bounds);
                     }
 
-                    // ✅ Fetch & update place details
                     getPlaceDetails(placeId);
 
                     marker.addListener("click", function () {
@@ -219,10 +218,11 @@ function updateMap() {
         );
     });
 }
-// **Function to Fetch Place Details**
+
+// Fetch place details and display them
 function getPlaceDetails(placeId) {
     placesService.getDetails(
-        { placeId, fields: ["name", "rating", "user_ratings_total", "formatted_address","website"] },
+        { placeId, fields: ["name", "rating", "user_ratings_total", "formatted_address", "website"] },
         function (place, status) {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
                 let detailsDiv = document.getElementById("place-details");
@@ -231,8 +231,7 @@ function getPlaceDetails(placeId) {
                     return;
                 }
 
-                // ✅ Show panel when a place is selected
-                detailsDiv.style.display = "block"; 
+                detailsDiv.style.display = "block";
                 detailsDiv.innerHTML = `
                     <div class="details-container">
                         <h3>${place.name}</h3>
@@ -248,33 +247,46 @@ function getPlaceDetails(placeId) {
     );
 }
 
-// Ensure panel disappears when nothing is selected
+// Hide details panel when no activities are selected
 function hideDetailsPanel() {
     let selectedItems = document.querySelectorAll(".itinerary-item.selected");
     let detailsDiv = document.getElementById("place-details");
 
     if (selectedItems.length === 0 && detailsDiv) {
-        detailsDiv.style.display = "none"; // ✅ Hide panel when no activities are selected
+        detailsDiv.style.display = "none";
     }
 }
 
-// Call hideDetailsPanel whenever an activity is toggled
-document.addEventListener("click", function () {
-    hideDetailsPanel();
-});
-
-// **Clear all markers from map**
+// Clear all markers from the map
 function clearMarkers() {
     if (Array.isArray(markers)) {
-        markers.forEach(marker => marker.setMap(null));
+        markers.forEach((marker) => marker.setMap(null));
         markers = [];
     }
 }
 
-// Submit selection function
+// Reset itinerary page selections and map
+function resetItineraryPage() {
+    document.querySelectorAll(".itinerary-item.selected").forEach((item) => {
+        item.classList.remove("selected");
+        const checkbox = item.querySelector("input[type='checkbox']");
+        if (checkbox) checkbox.checked = false;
+    });
+
+    clearMarkers();
+    if (map) {
+        map.setCenter({ lat: 51.5074, lng: -0.1278 });
+        map.setZoom(12);
+    }
+
+    const detailsDiv = document.getElementById("place-details");
+    if (detailsDiv) detailsDiv.style.display = "none";
+}
+
+// Submit itinerary selections
 function submitSelection(event) {
-    console.log("submitSelection function triggered");
-    
+    event.preventDefault();
+
     const itineraryPage = document.getElementById("itineraryPage");
     const confirmationPage = document.getElementById("confirmationPage");
     const confirmationMessage = document.getElementById("confirmationMessage");
@@ -284,9 +296,8 @@ function submitSelection(event) {
         return;
     }
 
-    // Ensure user selects at least one activity
     let selectedActivities = [];
-    document.querySelectorAll(".itinerary-item.selected").forEach(item => {
+    document.querySelectorAll(".itinerary-item.selected").forEach((item) => {
         const inputElement = item.querySelector("input[type='checkbox']");
         if (inputElement) {
             selectedActivities.push(inputElement.value);
@@ -295,27 +306,18 @@ function submitSelection(event) {
 
     if (selectedActivities.length === 0) {
         alert("Please select at least one activity!");
+        document.querySelectorAll(".itinerary-item").forEach((item) => {
+            if (!item.classList.contains("selected")) {
+                item.classList.add("error");
+            }
+        });
         return;
     }
 
-    // Update the confirmation message
     confirmationMessage.innerHTML = `
         <p>Activities selected: <strong>${selectedActivities.join(", ")}</strong>.</p>
     `;
 
-    // Toggle pages
-    itineraryPage.style.display = "none"; // Hide itineraryPage
-    confirmationPage.style.display = "flex"; // Show confirmationPage
-    confirmationPage.classList.add("show"); // Add show class for animations
-
-    // Debugging logs
-    console.log("Itinerary Page display:", itineraryPage.style.display);
-    console.log("Confirmation Page display:", confirmationPage.style.display);
-
-    // Reset map markers if necessary
-    clearMarkers();
-    if (map) {
-        map.setCenter({ lat: 51.5074, lng: -0.1278 });
-        map.setZoom(12);
-    }
+    resetItineraryPage();
+    togglePageVisibility([confirmationPage], [itineraryPage]);
 }
