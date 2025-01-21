@@ -304,6 +304,9 @@ function submitSelection(event) {
         }
     });
 
+    // Add submit alert here
+    alert("You have selected: " + selectedActivities.join(", "));
+
     if (selectedActivities.length === 0) {
         alert("Please select at least one activity!");
         document.querySelectorAll(".itinerary-item").forEach((item) => {
