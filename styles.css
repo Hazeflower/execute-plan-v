@@ -16,6 +16,7 @@ body {
     height: auto;
     min-height: 100vh;
     flex-direction: column; /* Stack elements vertically */
+    overflow: hidden; /* Prevent unwanted scroll */
 }
 
 /* Container for content */
@@ -32,7 +33,7 @@ body {
 
 /* Header */
 header h1 {
-    color: #d1006d; /* Dark pink color */
+    color: #d1006d; /* Dark pink colour */
     font-size: 3em;
     margin-bottom: 20px;
 }
@@ -66,7 +67,7 @@ header h1 {
 
 /* Accept Button styling */
 #accept-btn {
-    background-color: #ff6f61; /* Warm red color */
+    background-color: #ff6f61; /* Warm red colour */
     color: white;
     font-size: 1.2em;
     padding: 15px 30px;
@@ -107,6 +108,28 @@ footer {
     color: #777;
 }
 
+/* Page styling for smooth transitions */
+.page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.page.active {
+    display: block;
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
+}
+
 /* ---------------- ITINERARY PAGE ---------------- */
 #itineraryPage {
     display: none; /* Ensure it is hidden */
@@ -138,6 +161,11 @@ footer {
     min-height: 90vh; /* Make sure it stretches the full height */
     margin: 50px auto 50px 100px; /* Centered */
     overflow: hidden; /* Prevents unwanted scrollbars */
+}
+
+/* General selector for all children inside itineraryPage */
+#itineraryPage * {
+    transition: all 0.3s ease-in-out;
 }
 
 /* Page Title Inside White Box */
