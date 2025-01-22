@@ -5,6 +5,20 @@ let directionsService;
 let directionsRenderer;
 let infoWindow; // New info window for details
 
+// Page toggle utility
+function togglePageVisibility(pagesToShow = [], pagesToHide = []) {
+    pagesToShow.forEach((page) => {
+        page.style.display = "block";
+        page.classList.add("show");
+        page.classList.remove("hide");
+    });
+    pagesToHide.forEach((page) => {
+        page.style.display = "none";
+        page.classList.add("hide");
+        page.classList.remove("show");
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOMContentLoaded triggered");
 
@@ -18,21 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const confirmationMessage = document.getElementById("confirmationMessage");
 
     let rejectCount = 0; // Counter for tracking rejection clicks
-
-    // Page toggle utility
-    function togglePageVisibility(pagesToShow = [], pagesToHide = []) {
-        pagesToShow.forEach((page) => {
-            page.style.display = "block";
-            page.classList.add("show");
-            page.classList.remove("hide");
-        });
-        pagesToHide.forEach((page) => {
-            page.style.display = "none";
-            page.classList.add("hide");
-            page.classList.remove("show");
-        });
-    }
-
+    
     // Accept Button Logic
     if (acceptBtn && itineraryPage && invitationPage) {
         acceptBtn.addEventListener("click", function () {
