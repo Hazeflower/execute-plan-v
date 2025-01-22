@@ -137,6 +137,18 @@ footer {
     z-index: 1; /* Lower layer than confirmationPage */
 }
 
+#itineraryPage * {
+    display: none !important; /* Explicitly hide all children */
+}
+
+#itineraryPage.show {
+    display: flex; /* Show the parent when toggled */
+}
+
+#itineraryPage.show * {
+    display: block; /* Render children when the parent is shown */
+}
+
 /* White Box Container */
 .page-container {
     display: flex;
@@ -163,10 +175,7 @@ footer {
     overflow: hidden; /* Prevents unwanted scrollbars */
 }
 
-/* General selector for all children inside itineraryPage */
-#itineraryPage * {
-    transition: all 0.3s ease-in-out;
-}
+/*below white box here for old code */
 
 /* Page Title Inside White Box */
 .white-box h1 {
