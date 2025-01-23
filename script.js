@@ -315,6 +315,15 @@ function submitSelection(event) {
         <p>Activities selected: <strong>${selectedActivities.join(", ")}</strong>.</p>
     `;
 
+    console.log("Before toggling pages:");
+    console.log("Itinerary Page Display:", itineraryPage.style.display);
+    console.log("Confirmation Page Display:", confirmationPage.style.display);
+
     togglePageVisibility([confirmationPage], [itineraryPage]);
-    resetItineraryPage();    
+
+    console.log("After toggling pages:");
+    console.log("Itinerary Page Display:", itineraryPage.style.display);
+    console.log("Confirmation Page Display:", confirmationPage.style.display);
+
+    resetItineraryPage();
 }
