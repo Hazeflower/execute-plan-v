@@ -324,6 +324,7 @@ function submitSelection(event) {
     console.log("After toggling pages:");
     console.log("Itinerary Page Display:", itineraryPage.style.display);
     console.log("Confirmation Page Display:", confirmationPage.style.display);
+    console.log("Confirmation Message Content:", confirmationMessage.innerHTML);
 
     resetItineraryPage();
 }
