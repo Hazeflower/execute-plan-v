@@ -11,13 +11,19 @@
         <img src="images/email-icons.png" class="email-icon" alt="Email Icon">
         <h2>Your itinerary has been sent to your personal planner! 💌💖</h2>
         <p>Your personal planner will endeavour to bring you the most magical Valentine's Day (& After)! 🥰✨</p>
-        <p id="confirmationMessage"></p>      
+        <p id="confirmationMessage"></p> 
+
+        </div>
+        <button class="home-btn" id="home-btn"> Reselect / Reject 🔙</button>
+        </div>
+    
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const confirmationPage = document.getElementById("confirmationPage");
             const confirmationMessage = document.getElementById("confirmationMessage");
+            const homeBtn = document.getElementById("home-btn");
 
             confirmationPage.classList.add("show"); // Add show class for animations
 
@@ -39,6 +45,13 @@
                 `;
             } else {
                 confirmationMessage.textContent = "No activities were selected.";
+            }
+
+            if (homeBtn) {
+            homeBtn.addEventListener("click", function () {
+                alert("Going back to invitation page 💌");
+                window.location.href = "index.html";
+                });
             }
         });
     </script>
