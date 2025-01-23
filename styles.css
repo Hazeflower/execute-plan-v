@@ -465,3 +465,19 @@ footer {
     width: 80px;
     margin-bottom: 20px;
 }
+
+.home-btn {
+    background: linear-gradient(to right, #ff4d4d, #d1006d);
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.2em;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    margin-top: 20px;
+}
+
+.home-btn:hover {
+    background: linear-gradient(to right, #ff3333, #b3005c);
+}
