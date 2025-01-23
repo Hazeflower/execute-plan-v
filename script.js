@@ -313,8 +313,6 @@ function submitSelection(event) {
     alert("You have selected: " + selectedActivities.join(", "));
 
     // Redirect to confirmation.html with selected activities as query string
-    const query = encodeURIComponent(selectedActivities.join(", "));
-    window.location.href = `confirmation.html?activities=${query}`;
-
-    resetItineraryPage();
+    const activitiesParam = encodeURIComponent(selectedActivities.join(","));
+    window.location.href = `confirmation.html?activities=${activitiesParam}`;
 }
