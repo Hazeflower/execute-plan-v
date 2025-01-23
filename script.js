@@ -303,36 +303,4 @@ function resetItineraryPage() {
     if (detailsDiv) detailsDiv.style.display = "none";
 }
 
-// Submit itinerary selections
-function submitSelection(event) {
-    event.preventDefault();
-
-    const itineraryPage = document.getElementById("itineraryPage");
-    const confirmationPage = document.getElementById("confirmationPage");
-    const confirmationMessage = document.getElementById("confirmationMessage");
-
-    if (!itineraryPage || !confirmationPage || !confirmationMessage) {
-        console.error("⚠️ Missing required elements!");
-        return;
-    }
-
-    let selectedActivities = [];
-    document.querySelectorAll(".itinerary-item.selected").forEach((item) => {
-        const inputElement = item.querySelector("input[type='checkbox']");
-        if (inputElement) {
-            selectedActivities.push(inputElement.value);
-        }
-    });
-
-    if (selectedActivities.length === 0) {
-        alert("Please select at least one activity!");
-        return;
-    }
-    
-    // Add submit alert here
-    alert("You have selected: " + selectedActivities.join(", "));
-
-    // Redirect to confirmation.html with selected activities as query string
-    const activitiesParam = encodeURIComponent(selectedActivities.join(","));
-    window.location.href = `confirmation.html?activities=${activitiesParam}`;
-}
+// Submit itinerary selections (Old)
