@@ -16,7 +16,10 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            const confirmationPage = document.getElementById("confirmationPage");
             const confirmationMessage = document.getElementById("confirmationMessage");
+
+            confirmationPage.classList.add("show"); // Add show class for animations
 
             if (!confirmationMessage) {
                 console.error("Confirmation message element not found!");
