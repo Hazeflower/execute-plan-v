@@ -7,13 +7,34 @@
     <title>Confirmation Page</title>
 </head>
 <body>
-<div id="confirmationPage" class="confirmation-container">
-        <img src="images/email-icon.png" class="email-icon">
+    <div id="confirmationPage" class="confirmation-container">
+        <img src="images/email-icon.png" class="email-icon" alt="Email Icon">
         <h2>Your itinerary has been sent to your personal planner! 💌💖</h2>
         <p>Your personal planner will endeavour to bring you the most magical Valentine's Day (& After)! 🥰✨</p>
         <p id="confirmationMessage"></p>      
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Wait for DOMContentLoaded
+        document.addEventListener("DOMContentLoaded", function () {
+            // Extract query parameters from the URL
+            const params = new URLSearchParams(window.location.search);
+            const activities = params.get("activities"); // "activities" will hold the selected itinerary
+
+            // Get the confirmationMessage element
+            const confirmationMessage = document.getElementById("confirmationMessage");
+
+            // Update the confirmation message dynamically
+            if (activities) {
+                confirmationMessage.innerHTML = `
+                    <strong>Selected Activities:</strong> ${activities.replace(/,/g, ", ")}.
+                `;
+            } else {
+                confirmationMessage.innerHTML = `
+                    <em>No activities were selected.</em>
+                `;
+            }
+        });
+    </script>
 </body>
 </html>
