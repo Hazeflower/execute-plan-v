@@ -304,19 +304,13 @@ function submitSelection(event) {
         }
     });
 
-    // Add submit alert here
-    alert("You have selected: " + selectedActivities.join(", "));
-
     if (selectedActivities.length === 0) {
         alert("Please select at least one activity!");
-        document.querySelectorAll(".itinerary-item").forEach((item) => {
-            if (!item.classList.contains("selected")) {
-                item.classList.add("error");
-            }
-        });
         return;
     }
-
+    
+    // Add submit alert here
+    alert("You have selected: " + selectedActivities.join(", "));
     confirmationMessage.innerHTML = `
         <p>Activities selected: <strong>${selectedActivities.join(", ")}</strong>.</p>
     `;
