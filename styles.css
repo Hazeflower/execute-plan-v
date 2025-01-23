@@ -448,7 +448,7 @@ footer {
     align-items: center;
     margin: auto;
     padding: 40px;
-    max-width: 90%; /* Ensures it doesn't overflow */
+    max-width: 100%; 
     background: white;
     border-radius: 10px;
     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
