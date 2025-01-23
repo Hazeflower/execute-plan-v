@@ -442,17 +442,18 @@ footer {
 }
 
 .confirmation-container {
+    background-color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: auto;
-    padding: 40px;
-    max-width: 100%; 
-    background: white;
+    padding: 30px;
+    width: 80%;
+    max-width: 600px;
     border-radius: 10px;
-    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
+    margin: 50px auto; /* Centering the page */
 }
 
 #confirmationMessage {
