@@ -26,10 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const rejectBtn = document.getElementById("reject-btn");
     const itineraryPage = document.getElementById("itineraryPage");
     const invitationPage = document.getElementById("invitationPage");
-    const confirmationPage = document.getElementById("confirmationPage");
     const mapElement = document.getElementById("map");
     const submitButton = document.querySelector(".submit-btn");
-    const confirmationMessage = document.getElementById("confirmationMessage");
 
     let rejectCount = 0; // Counter for tracking rejection clicks
     
@@ -46,6 +44,33 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Step 2: Submit Button Logic (Redirects to confirmationPage)
+    if (submitButton) {
+        submitButton.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            const selectedActivities = [];
+            document.querySelectorAll(".itinerary-item.selected").forEach((item) => {
+                const inputElement = item.querySelector("input[type='checkbox']");
+                if (inputElement) {
+                    selectedActivities.push(inputElement.value);
+                }
+            });
+
+            if (selectedActivities.length === 0) {
+                alert("Please select at least one activity!");
+                return;
+            }
+
+            // Add alert with selections
+            alert("You have selected: " + selectedActivities.join(", "));
+
+            // Redirect to confirmation.html with activities in query string
+            const activitiesParam = encodeURIComponent(selectedActivities.join(","));
+            window.location.href = `confirmation.html?activities=${activitiesParam}`;
+        });
+    }
+
     // Reject Button Logic
     if (rejectBtn) {
         rejectBtn.addEventListener("click", function () {
@@ -54,13 +79,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Submit Button Logic
-    if (submitButton) {
-        submitButton.removeEventListener("click", submitSelection); // Ensure no duplicate listeners
-        submitButton.addEventListener("click", submitSelection);
-    } else {
-        console.warn("Submit button not found on initial load");
-    }
+    // Old Submit Button Logic Here
+    
 
     // Event delegation for itinerary selection
     document.addEventListener("click", function (event) {
