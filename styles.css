@@ -436,7 +436,7 @@ footer {
 /* Active state for showing the confirmation page */
 #confirmationPage.show {
     display: flex !important; /* Render the page */
-    opacity: 1; /* Ensure it becomes visible */
+    opacity: 1 !important; /* Ensure it becomes visible */
 }
 
 .confirmation-container {
