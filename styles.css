@@ -137,6 +137,13 @@ footer {
     z-index: 1; /* Lower layer than confirmationPage */
 }
 
+/* Force all children inside itineraryPage to follow its parent visibility */
+#itineraryPage * {
+    visibility: inherit; /* Inherit visibility from parent */
+    transition: all 0.3s ease-in-out; /* Smooth transitions */
+    opacity: 1;
+}
+
 /* White Box Container */
 .page-container {
     display: flex;
@@ -163,8 +170,11 @@ footer {
     overflow: hidden; /* Prevents unwanted scrollbars */
 }
 
-/* General selector for all children inside itineraryPage */
-#itineraryPage * {
+/* Smoothly hide itineraryPage children */
+#itineraryPage.hidden * {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
     transition: all 0.3s ease-in-out;
 }
 
@@ -421,6 +431,7 @@ footer {
 /* Active state for showing the confirmation page */
 #confirmationPage.show {
     display: flex !important; /* Render the page */
+    opacity: 1; /* Ensure it becomes visible */
 }
 
 .confirmation-container {
