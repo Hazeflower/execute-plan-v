@@ -15,24 +15,27 @@
     </div>
 
     <script>
-        // Wait for DOMContentLoaded
         document.addEventListener("DOMContentLoaded", function () {
-            // Extract query parameters from the URL
-            const params = new URLSearchParams(window.location.search);
-            const activities = params.get("activities"); // "activities" will hold the selected itinerary
-
-            // Get the confirmationMessage element
             const confirmationMessage = document.getElementById("confirmationMessage");
 
-            // Update the confirmation message dynamically
+            if (!confirmationMessage) {
+                console.error("Confirmation message element not found!");
+                return;
+            }
+
+            // Extract activities from query string
+            const urlParams = new URLSearchParams(window.location.search);
+            const activities = urlParams.get("activities");
+
+            // Populate the confirmation message
             if (activities) {
+                const activityList = activities.split(",").join(", ");
                 confirmationMessage.innerHTML = `
-                    <strong>Selected Activities:</strong> ${activities.replace(/,/g, ", ")}.
+                    <p>You selected the following activities:</p>
+                    <strong>${activityList}</strong>
                 `;
             } else {
-                confirmationMessage.innerHTML = `
-                    <em>No activities were selected.</em>
-                `;
+                confirmationMessage.textContent = "No activities were selected.";
             }
         });
     </script>
