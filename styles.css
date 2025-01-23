@@ -144,6 +144,11 @@ footer {
     opacity: 1;
 }
 
+#itineraryPage:not(.show) * {
+    display: none !important;
+    opacity: 0 !important;
+}
+
 /* White Box Container */
 .page-container {
     display: flex;
