@@ -311,20 +311,10 @@ function submitSelection(event) {
     
     // Add submit alert here
     alert("You have selected: " + selectedActivities.join(", "));
-    confirmationMessage.innerHTML = `
-        <p>Activities selected: <strong>${selectedActivities.join(", ")}</strong>.</p>
-    `;
 
-    console.log("Before toggling pages:");
-    console.log("Itinerary Page Display:", itineraryPage.style.display);
-    console.log("Confirmation Page Display:", confirmationPage.style.display);
-
-    togglePageVisibility([confirmationPage], [itineraryPage]);
-
-    console.log("After toggling pages:");
-    console.log("Itinerary Page Display:", itineraryPage.style.display);
-    console.log("Confirmation Page Display:", confirmationPage.style.display);
-    console.log("Confirmation Message Content:", confirmationMessage.innerHTML);
+    // Redirect to confirmation.html with selected activities as query string
+    const query = encodeURIComponent(selectedActivities.join(", "));
+    window.location.href = `confirmation.html?activities=${query}`;
 
     resetItineraryPage();
 }
