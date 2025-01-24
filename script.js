@@ -175,17 +175,18 @@ function toggleSelection(item) {
 
     let placeName = item.getAttribute("data-place");
     if (placeName) {
-        updateMap(placeName);
-    } else {
-        // Clear the details panel if the unselected activity was displayed
-        let detailsDiv = document.getElementById("place-details");
-        if (detailsDiv) {
-            let currentDetailsName = detailsDiv.querySelector("h3")?.innerText;
-            if (currentDetailsName === item.getAttribute("data-place")) {
-                detailsDiv.style.display = "none"; // Clear details
+        if (checkbox.checked) {
+            updateMap(placeName); // Add marker and update map
+        } else {
+            // Clear the details panel if the unselected activity was displayed
+            let detailsDiv = document.getElementById("place-details");
+            if (detailsDiv) {
+                let currentDetailsName = detailsDiv.querySelector("h3")?.innerText;
+                if (currentDetailsName === item.getAttribute("data-place")) {
+                    detailsDiv.style.display = "none"; // Clear details
+                }
             }
         }
-    }
     } else {
         console.error("No place name found for selected item.");
     }
