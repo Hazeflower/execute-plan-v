@@ -177,6 +177,16 @@ function toggleSelection(item) {
     if (placeName) {
         updateMap(placeName);
     } else {
+        // Clear the details panel if the unselected activity was displayed
+        let detailsDiv = document.getElementById("place-details");
+        if (detailsDiv) {
+            let currentDetailsName = detailsDiv.querySelector("h3")?.innerText;
+            if (currentDetailsName === item.getAttribute("data-place")) {
+                detailsDiv.style.display = "none"; // Clear details
+            }
+        }
+    }
+    } else {
         console.error("No place name found for selected item.");
     }
 }
@@ -218,11 +228,11 @@ function updateMap() {
                     markers.push(marker);
                     bounds.extend(position);
 
-                    if (selectedItems.length === 1) {
+                    // Focus on the latest selected item
+                    if (placeName === selectedPlaceName) {
                         map.panTo(position);
-                        map.setZoom(14);
-                    } else {
-                        map.fitBounds(bounds);
+                        map.setZoom(14); // Adjust zoom level for a single activity
+                        getPlaceDetails(placeId); // Show details panel for the latest activity
                     }
 
                     getPlaceDetails(placeId);
@@ -231,6 +241,13 @@ function updateMap() {
                         infoWindow.setContent(`<b>${results[0].name}</b>`);
                         infoWindow.open(map, marker);
                     });
+
+                    // Optional: Auto-zoom out to fit all markers after a delay
+                    if (selectedItems.length > 1) {
+                        setTimeout(() => {
+                            map.fitBounds(bounds); // Zoom out to fit all markers
+                        }, 10000); // 10-second delay
+                    }
                 } else {
                     console.error("Failed to retrieve place:", status);
                 }
