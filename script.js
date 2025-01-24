@@ -192,7 +192,7 @@ function toggleSelection(item) {
 }
 
 // Update the map based on selected places
-function updateMap() {
+function updateMap(selectedPlaceName) {
     clearMarkers();
     let selectedItems = document.querySelectorAll(".itinerary-item.selected");
     let bounds = new google.maps.LatLngBounds();
