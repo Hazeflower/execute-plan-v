@@ -420,6 +420,20 @@ footer {
 }
 
 /* Confirmation Page Styling */
+#confirmationPage {
+     display: none; /* Hidden by default for multi-page workflow */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #ffcccb;
+    padding: 20px; /* Adds padding for smaller screens */
+}
+
+/* Active state for showing the confirmation page */
+#confirmationPage.show {
+    display: flex !important; /* Render the page */
+}
+
 .confirmation-container {
     display: flex;
     flex-direction: column; /* Stack elements vertically */
@@ -434,20 +448,6 @@ footer {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Shadow for depth */
     z-index: 10; /* Ensures it appears above other elements */
     position: relative; /* Stays above the background */
-}
-
-#confirmationPage {
-     display: none; /* Hidden by default for multi-page workflow */
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #ffcccb;
-    padding: 20px; /* Adds padding for smaller screens */
-}
-
-/* Active state for showing the confirmation page */
-#confirmationPage.show {
-    display: flex !important; /* Render the page */
 }
 
 //* old code for confirmationcontainer *//
