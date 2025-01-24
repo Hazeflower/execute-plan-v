@@ -441,20 +441,7 @@ footer {
     opacity: 1 !important; /* Ensure it becomes visible */
 }
 
-.confirmation-container {
-    background: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
-    width: auto; /* Automatically adjust the width based on content */
-    max-width: 600px; /* Control the maximum width */
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin: 0 auto; /* Center the box horizontally */
-}
+//* old code for confirmationcontainer *//
 
 #confirmationMessage {
   margin-top: 15px; /* Add space between static and dynamic content */
