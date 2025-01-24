@@ -448,11 +448,12 @@ footer {
     justify-content: center;
     align-items: center;
     padding: 30px;
-    width: 80%;
+    width: auto; /* Automatically adjust the width based on content */
+    max-width: 600px; /* Control the maximum width */
     border-radius: 10px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin: 50px auto; /* Centering the page */
+    margin: 0 auto; /* Center the box horizontally */
 }
 
 #confirmationMessage {
