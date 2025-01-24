@@ -424,6 +424,7 @@ footer {
      display: none; /* Hidden by default for multi-page workflow */
     justify-content: center;
     align-items: center;
+    min-height: 50vh;
     background-color: #ffcccb;
     padding: 20px; /* Adds padding for smaller screens */
 }
