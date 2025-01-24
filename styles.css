@@ -431,7 +431,7 @@ footer {
 
 /* Active state for showing the confirmation page */
 #confirmationPage.show {
-    display: flex !important; /* Render the page */
+    display: flex; /* Render the page */
 }
 
 .confirmation-box {
@@ -443,7 +443,7 @@ footer {
     max-width: 800px;
     padding: 30px;
     margin: 0 auto; /* Centres the container */
-    background: #fff; /* White background for the box */
+    background: #fff !important; /* White background for the box */
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Shadow for depth */
     z-index: 10; /* Ensures it appears above other elements */
