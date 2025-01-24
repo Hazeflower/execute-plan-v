@@ -153,7 +153,7 @@ function initMap() {
     infoWindow = new google.maps.InfoWindow();
 }
 
-// Toggle selection of itinerary items
+// Toggle selection of itinerary items old position
 function toggleSelection(item) {
     item.classList.toggle("selected");
 
@@ -176,16 +176,14 @@ function toggleSelection(item) {
     let placeName = item.getAttribute("data-place");
     if (placeName) {
         if (checkbox.checked) {
-            updateMap(placeName); // Add marker and update map
+            updateMap(placeName); // Update map with the latest selected place
         } else {
-            // Clear the details panel if the unselected activity was displayed
-            let detailsDiv = document.getElementById("place-details");
-            if (detailsDiv) {
-                let currentDetailsName = detailsDiv.querySelector("h3")?.innerText;
-                if (currentDetailsName === item.getAttribute("data-place")) {
-                    detailsDiv.style.display = "none"; // Clear details
-                }
+            // If the latest selected place is unselected, hide the details panel
+            if (latestSelectedPlaceId === placeName) {
+                hideDetailsPanel();
             }
+
+            updateMap(); // Recalculate map bounds and markers
         }
     } else {
         console.error("No place name found for selected item.");
@@ -193,6 +191,8 @@ function toggleSelection(item) {
 }
 
 // Update the map based on selected places
+let latestSelectedPlaceId = null; // Track the most recently selected placeId
+
 function updateMap(selectedPlaceName) {
     clearMarkers();
     let selectedItems = document.querySelectorAll(".itinerary-item.selected");
@@ -202,6 +202,8 @@ function updateMap(selectedPlaceName) {
         console.log("No activities selected. Resetting to default London view.");
         map.setCenter({ lat: 51.5074, lng: -0.1278 });
         map.setZoom(12);
+
+        hideDetailsPanel(); // Hide details if nothing is selected
         return;
     }
 
@@ -222,39 +224,39 @@ function updateMap(selectedPlaceName) {
                         title: results[0].name,
                         icon: {
                             url: "https://raw.githubusercontent.com/Hazeflower/execute-plan-v/main/images/Heart%20marker.png",
-                            scaledSize: new google.maps.Size(30, 30),
+                            scaledSize: new google.maps.Size(25, 25),
                         },
                     });
 
                     markers.push(marker);
                     bounds.extend(position);
 
-                    // Focus on the latest selected item
+                    // If the selectedPlaceName matches this place, update details panel
                     if (placeName === selectedPlaceName) {
+                        latestSelectedPlaceId = placeId; // Update the latest selected placeId
+                        getPlaceDetails(placeId); // Fetch and show details
                         map.panTo(position);
-                        map.setZoom(14); // Adjust zoom level for a single activity
-                        getPlaceDetails(placeId); // Show details panel for the latest activity
+                        map.setZoom(14);
                     }
 
-                    getPlaceDetails(placeId);
-
+                    // Add click listener to the marker to show details on click
                     marker.addListener("click", function () {
-                        infoWindow.setContent(`<b>${results[0].name}</b>`);
-                        infoWindow.open(map, marker);
+                        latestSelectedPlaceId = placeId; // Update the latest selected placeId
+                        getPlaceDetails(placeId); // Show details for clicked marker
                     });
-
-                    // Optional: Auto-zoom out to fit all markers after a delay
-                    if (selectedItems.length > 1) {
-                        setTimeout(() => {
-                            map.fitBounds(bounds); // Zoom out to fit all markers
-                        }, 10000); // 10-second delay
-                    }
                 } else {
                     console.error("Failed to retrieve place:", status);
                 }
             }
         );
     });
+
+    // Optional: Auto-zoom out to fit all markers after 10 seconds
+    if (selectedItems.length > 1) {
+        setTimeout(() => {
+            map.fitBounds(bounds); // Zoom out to fit all markers
+        }, 10000); // 10-second delay
+    }
 }
 
 // Fetch place details and display them
@@ -287,13 +289,17 @@ function getPlaceDetails(placeId) {
 
 // Hide details panel when no activities are selected
 function hideDetailsPanel() {
-    let selectedItems = document.querySelectorAll(".itinerary-item.selected");
     let detailsDiv = document.getElementById("place-details");
 
-    if (selectedItems.length === 0 && detailsDiv) {
+    // Hide details panel only if there are no selected items
+    if (detailsDiv) {
         detailsDiv.style.display = "none";
+        detailsDiv.innerHTML = ""; // Clear the content
     }
+
+    latestSelectedPlaceId = null; // Reset the latest selected place
 }
+
 
 // Clear all markers from the map
 function clearMarkers() {
