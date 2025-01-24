@@ -21,7 +21,10 @@
     </section>
 </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script>
+        emailjs.init('36wbx-7kRDTZHPxGF'); // Replace YOUR_PUBLIC_KEY with your actual public key
+        
         document.addEventListener("DOMContentLoaded", function () {
             const confirmationPage = document.getElementById("confirmationPage");
             const confirmationMessage = document.getElementById("confirmationMessage");
@@ -45,6 +48,9 @@
                     <p>You selected the following activities:</p>
                     <strong>${activityList}</strong>
                 `;
+
+                // Send an email using EmailJS
+            sendConfirmationEmail(activityList);
             } else {
                 confirmationMessage.textContent = "No activities were selected.";
             }
@@ -56,6 +62,25 @@
                 });
             }
         });
+
+        // Function to send confirmation email using EmailJS
+        function sendConfirmationEmail(activityList) {
+            const serviceID = "service_75j6q1g"; // Replace with your EmailJS service ID
+            const templateID = "template_uts0nl7"; // Replace with your EmailJS template ID
+    
+            const emailParams = {
+                activityList: activityList, // Pass the selected activities to your email template
+                recipientEmail: "kjk30113@gmail.com" // Replace with the recipient's email address
+            };
+    
+            emailjs.send(serviceID, templateID, emailParams)
+                .then(function (response) {
+                    console.log("Email successfully sent!", response.status, response.text);
+                })
+                .catch(function (error) {
+                    console.error("Error sending email:", error);
+                });
+        }
     </script>
 </body>
 </html>
