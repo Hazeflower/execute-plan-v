@@ -452,23 +452,19 @@ footer {
 
 /* Add spacing between sections */
 .confirmation-section {
-    margin: 20px 0; /* Space between sections */
+    margin: 10px 0; /* Space between sections */
     text-align: center; /* Optional: centre-align text for neatness */
 }
 
 /* Ensure consistent spacing between text and button */
 .confirmation-section p {
-    margin: 10px 0;
+    margin-bottom: 10px 0;
 }
 
 .confirmation-section h2 {
     font-size: 1.8em;
     color: #d1006d;
-    margin: 10px 0;
-}
-
-.confirmation-box > .confirmation-section {
-    padding: 10px 0; /* Extra internal space for sections */
+    margin-bottom: 10px 0;
 }
 
 #confirmationMessage {
