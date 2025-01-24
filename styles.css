@@ -434,12 +434,12 @@ footer {
     display: flex !important; /* Render the page */
 }
 
-.confirmation-container {
+.confirmation-box {
     display: flex;
     flex-direction: column; /* Stack elements vertically */
     justify-content: center;
     align-items: center;
-    width: 80%; /* Adjust as necessary */
+    width: 70%; /* Adjust as necessary */
     max-width: 800px;
     padding: 30px;
     margin: 0 auto; /* Centres the container */
