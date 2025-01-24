@@ -424,7 +424,7 @@ footer {
      display: none; /* Hidden by default for multi-page workflow */
     justify-content: center;
     align-items: center;
-    min-height: 50vh;
+    min-height: 70vh;
     background-color: #ffcccb;
     padding: 20px; /* Adds padding for smaller screens */
 }
@@ -439,7 +439,7 @@ footer {
     flex-direction: column; /* Stack elements vertically */
     justify-content: center;
     align-items: center;
-    width: 70%; /* Adjust as necessary */
+    width: 80%; /* Adjust as necessary */
     max-width: 800px;
     padding: 30px;
     margin: 0 auto; /* Centres the container */
@@ -462,7 +462,7 @@ footer {
 }
 
 .confirmation-section h2 {
-    font-size: 1.8em;
+    font-size: 1.4em;
     color: #d1006d;
     margin-bottom: 10px 0;
 }
