@@ -161,12 +161,13 @@ footer {
     align-items: center;
     width: 100%;
     min-height: 100vh;
+    overflow-x: auto; /* Allow horizontal scrolling */
     flex-direction: row; /* Change from column to row */
 }
 
 .white-box {
-    width: auto;  /* Allow it to grow based on content */
-    max-width: 90vw;  /* Prevent it from becoming too wide */
+    width: fit-content;  /* Allow it to grow based on content */
+    min-width: 90%; /* Ensure it doesn’t collapse on small screens */
     background: white;
     padding: 30px;
     border-radius: 10px;
