@@ -174,9 +174,9 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between; /* Ensures content is spaced */
+    justify-content: flex-start; /* Ensures content is spaced */
     min-height: 90vh; /* Make sure it stretches the full height */
-    margin: 20px 20px 30px 30px; /* Centered */
+    margin: 20px auto; /* Centered */
     overflow-x: auto; /* Enable horizontal scroll */
     overflow-y: auto; /* Enable vertical scroll */
 }
@@ -244,11 +244,28 @@ footer {
     justify-content: flex-start; /* Aligns items to the left */
     gap: 15px;
     padding: 20px;
-    max-width: 100%; /* Ensures it fits inside `.white-box` */
+    width: auto; /* Allow the grid to expand horizontally */
+    max-width: 100%; /* Prevent it from overflowing the white box */
+    scroll-behavior: smooth; /* Smooth scrolling for a better user experience */
+}
+
+/* Scrollbar Styling for Webkit Browsers */
+.itinerary-grid::-webkit-scrollbar {
+    height: 10px; /* Horizontal scrollbar height */
+}
+
+.itinerary-grid::-webkit-scrollbar-thumb {
+    background: #ab2330; /* Royal red scrollbar */
+    border-radius: 10px;
+}
+
+.itinerary-grid::-webkit-scrollbar-track {
+    background: #f4cbb7; /* Light coral background */
 }
 
 /* Itinerary Item Styling */
 .itinerary-item {
+    flex: 0 0 auto; /* Prevent shrinking or wrapping */
     display: flex;
     flex-direction: column;
     align-items: center;
