@@ -119,7 +119,7 @@ function handleRejection(rejectBtn, rejectCount) {
 
         setTimeout(() => {
             alert("But if you really are busy, please tell me 😢");
-        }, 5000);
+        }, 3000);
     } else {
         alert("Are you sure? 😢");
 
@@ -251,11 +251,11 @@ function updateMap(selectedPlaceName) {
         );
     });
 
-    // Optional: Auto-zoom out to fit all markers after 10 seconds
+    // Optional: Auto-zoom out to fit all markers after 5 seconds
     if (selectedItems.length > 1) {
         setTimeout(() => {
             map.fitBounds(bounds); // Zoom out to fit all markers
-        }, 10000); // 10-second delay
+        }, 5000); // 5-second delay
     }
 }
 
