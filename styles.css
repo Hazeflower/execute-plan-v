@@ -171,7 +171,7 @@ footer {
     align-items: center;
     justify-content: space-between; /* Ensures content is spaced */
     min-height: 90vh; /* Make sure it stretches the full height */
-    margin: 50px auto 50px 100px; /* Centered */
+    margin: 20px 20px 30px 30px; /* Centered */
     overflow: hidden; /* Prevents unwanted scrollbars */
 }
 
@@ -196,7 +196,7 @@ footer {
     display: flex;
     justify-content: center;
     width: 100%;
-    gap: 50px;
+    gap: 5px;
     flex-grow: 1; /* Fills available space */
 }
 
@@ -325,7 +325,7 @@ footer {
     align-items: center;
     justify-content: flex-start;
     min-width: 450px; /* Prevents map from getting squished */
-    margin-top: 200px; /* Pushes it down */
+    margin-top: 270px; /* Pushes it down */
     position: relative; /* Keep it within `.white-box` */
 }
 
@@ -464,6 +464,12 @@ footer {
 .confirmation-section h2 {
     font-size: 1.4em;
     color: #ab2330; /* Royal red for titles */
+    margin-bottom: 10px 0;
+}
+
+.confirmation-section h3 {
+    font-size: 1.2em;
+    color: #ab2330; /* Royal red colour */
     margin-bottom: 10px 0;
 }
 
