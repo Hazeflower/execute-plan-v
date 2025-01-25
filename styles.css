@@ -241,7 +241,6 @@ footer {
     display: flex;
     flex-wrap: nowrap; /* Prevents wrapping */
     overflow-x: auto;  /* Adds horizontal scrolling if too many items */
-    overflow-y: auto; /* Enable horizontal scrolling */
     justify-content: flex-start; /* Aligns items to the left */
     gap: 15px;
     padding: 20px;
@@ -267,7 +266,6 @@ footer {
 /* Itinerary Item Styling */
 .itinerary-item {
     flex: 0 0 auto; /* Prevent shrinking or wrapping */
-    width: 150px; /* Adjust as necessary */
     display: flex;
     flex-direction: column;
     align-items: center;
