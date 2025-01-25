@@ -250,13 +250,6 @@ function updateMap(selectedPlaceName) {
             }
         );
     });
-
-    // Optional: Auto-zoom out to fit all markers after 10 seconds
-    if (selectedItems.length > 1) {
-        setTimeout(() => {
-            map.fitBounds(bounds); // Zoom out to fit all markers
-        }, 10000); // 10-second delay
-    }
 }
 
 // Fetch place details and display them
