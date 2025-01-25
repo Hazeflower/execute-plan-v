@@ -8,7 +8,7 @@
 /* Body styling */
 body {
     font-family: 'Arial', sans-serif;
-    background: #f4cbb7; /* Matte black background */
+    background: #f4cbb7; 
     color: #333;
     display: flex;
     justify-content: center;
@@ -16,7 +16,13 @@ body {
     height: auto;
     min-height: 100vh;
     flex-direction: column; /* Stack elements vertically */
-    overflow: hidden; /* Prevent unwanted scroll */
+    overflow-x: auto; /* Enable horizontal scroll */
+    overflow-y: auto; /* Enable vertical scroll */
+}
+
+/* Enable smooth scrolling */
+html {
+    scroll-behavior: smooth;
 }
 
 /* Container for content */
@@ -116,7 +122,6 @@ footer {
     width: 100vw;
     height: 100vh;
     display: none;
-    overflow: hidden;
     opacity: 0;
     pointer-events: none;
     transform: translateX(100%);
@@ -172,7 +177,8 @@ footer {
     justify-content: space-between; /* Ensures content is spaced */
     min-height: 90vh; /* Make sure it stretches the full height */
     margin: 20px 20px 30px 30px; /* Centered */
-    overflow: hidden; /* Prevents unwanted scrollbars */
+    overflow-x: auto; /* Enable horizontal scroll */
+    overflow-y: auto; /* Enable vertical scroll */
 }
 
 /* Smoothly hide itineraryPage children */
